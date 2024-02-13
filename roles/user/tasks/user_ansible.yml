@@ -20,10 +20,12 @@
   ansible.posix.authorized_key:
     user: 'ansible'
     state: "{{ l3d_users_user__ansible_user_state | ternary('present', 'absent') }}"
-    key: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
+    key: "{{ l3d_users_user__ansible_ssh_keys }}"
     exclusive: true
+  when: l3d_users_user__set_ansible_ssh_keys | bool
 
 - name: Add admin keys to user ansible
   become: true
   ansible.builtin.debug:
     msg: "tbd."
+  when: l3d_users_user__set_ansible_ssh_keys
