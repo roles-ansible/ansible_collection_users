@@ -2,5 +2,9 @@
 - name: Perform optional versionscheck
   ansible.builtin.include_tasks:
     file: 'versioncheck.yml'
-  when: submodules_versioncheck|bool
+  when: submodules_versioncheck | bool
 
+- name: Create ansible user with superuser permissions
+  ansible.builtin.include_tasks:
+    file: 'user_ansible.yml'
+  when: l3d_users_user__create_ansible | bool

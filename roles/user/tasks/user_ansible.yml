@@ -1,0 +1,29 @@
+---
+- name: Create group ansible
+  become: true
+  ansible.builtin.group:
+    name: 'ansible'
+    state: "{{ l3d_users_user__ansible_user_state | ternary('present', 'absent') }}"
+
+- name: Create user ansible
+  become: true
+  ansible.builtin.user:
+    name: 'ansible'
+    comment: 'User for ansible to login and perform tasks'
+    shell: '/bin/bash'
+    group: 'ansible'
+    state: "{{ l3d_users_user__ansible_user_state | ternary('present', 'absent') }}"
+    create_home: true
+
+- name: Set dedicated SSH keys for User ansible and drop all other keys
+  become: true
+  ansible.posix.authorized_key:
+    user: 'ansible'
+    state: "{{ l3d_users_user__ansible_user_state | ternary('present', 'absent') }}"
+    key: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
+    exclusive: true
+
+- name: Add admin keys to user ansible
+  become true
+  ansible.builtin.debug:
+    msg: "tbd."
