@@ -1,0 +1,3 @@
+---
+# run simple versionscheck
+submodules_versioncheck: false
