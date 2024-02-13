@@ -24,6 +24,6 @@
     exclusive: true
 
 - name: Add admin keys to user ansible
-  become true
+  become: true
   ansible.builtin.debug:
     msg: "tbd."
