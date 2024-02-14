@@ -29,7 +29,7 @@
   ansible.posix.authorized_key:
     user: 'ansible'
     state: "{{ l3d_users_user__ansible_user_state | ternary('present', 'absent') }}"
-    key: "{{ item.pubkeys | default () }}"
+    key: "{{ item.pubkeys | default() }}"
   loop: "{{ _l3d_users_user__merged_users }}"
   when: item.admin | default(false) | bool
   loop_control:

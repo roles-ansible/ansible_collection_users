@@ -7,7 +7,9 @@ Optionally you can also create an ansible user and add specified ssh keys to his
 There are two variables to define users. The ``l3d_users__default_users`` is ment to put to your group_vars to define a default for your system. The ``l3d_users__local_users`` could be put in your host_vars to define host-specific user and admin roles.
 
  Variables:
--------------
+-----------
+
+### User Management
 
 + The dictionary-variable for your group_vars to set your general users and admins is ``l3d_users__default_users``.
 + The dictionary-variable for your host_vars to set your host-specific users and admins is: ``l3d_users__local_users``.
@@ -25,48 +27,42 @@ The Option of these directory-variables are the following.
 | password | password hash | See [official FAQ](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module) |
 | remove | ``false`` | completly remove user if state is absent |
 
+### Other
 
 | name | default value | description |
 | ---  | --- | --- |
-l3d_users_user__create_ansible: true
-l3d_users_user__ansible_user_state: 'present'
-l3d_users_user__set_ansible_ssh_keys: false
-l3d_users_user__ansible_ssh_keys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
+| l3d_users_user__create_ansible | ``true`` | Create User ansible |
+| l3d_users_user__ansible_user_state | ``present`` | Create or delete user ansible |
+| l3d_users_user__set_ansible_ssh_keys | ``false`` | Set SSH Keys for User ansible |
+| l3d_users_user__ansible_ssh_keys | | SSH public Keys. One per line or as lookup |
+| submodules_versioncheck | ``false`` | Optionaly enable simple versionscheck of this role |
 
+ Example Playbook
+-----------------
+```yaml
+- name: Create System with User and Passwords
+  hosts: example.com
+  roles:
+    - {role: l3d.users.user, tags: 'user'}
+  vars:
+    l3d_users__local_users:
+      - name: 'alice'
+        state: 'present'
+        shell: '/bin/bash'
+        create_home: true
+        admin: true
+        pubkeys: |
+          ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPvvXN33GwkTF4ZOwPgF21Un4R2z9hWUuQt1qIfzQyhC
+          ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAG65EdcM+JLv0gnzT9LcqVU47Pkw0SqiIg7XipXENi8
+          ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJz7zEvUVgJJJsIgfG3izsqYcM22IaKz4jGVUbNRL2PX
+        exklusive_pubkeys: true
+      - name: 'bob'
+        state: 'present'
+        admin: false
+        pubkeys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
 
-# create users
-l3d_users__default_users: {}
-#  - name: 'alice'
-#    state: 'present'
-#    shell: '/bin/bash'
-#    create_home: true
-#    admin: true
-#    pubkeys: |
-#       ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPvvXN33GwkTF4ZOwPgF21Un4R2z9hWUuQt1qIfzQyhC
-#       ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAG65EdcM+JLv0gnzT9LcqVU47Pkw0SqiIg7XipXENi8
-#       ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJz7zEvUVgJJJsIgfG3izsqYcM22IaKz4jGVUbNRL2PX
-#    exklusive_pubkeys: true
-#    password: "$Password_hash"
-#  - name: 'bob'
-#    state: 'present'
-#    shell: '/bin/zsh'
-#    admin: false
-#    pubkeys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
-#    exklusive_pubkeys: false
-
-l3d_users__local_users: {}
-#  - name: 'charlie'
-#    state: 'present'
-#    admin: false
-#    pubkeys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
-
-# Create ansible mamagement user
-l3d_users_user__create_ansible: true
-l3d_users_user__ansible_user_state: 'present'
-l3d_users_user__set_ansible_ssh_keys: false
-l3d_users_user__ansible_ssh_keys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
-# run simple versionscheck
-submodules_versioncheck: false
-
-
-work in progress...
+    l3d_users_user__create_ansible: true
+    l3d_users_user__set_ansible_ssh_keys: true
+    l3d_users_user__ansible_ssh_keys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
+    submodules_versioncheck: true
+```
