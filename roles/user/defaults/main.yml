@@ -26,9 +26,9 @@ l3d_users__local_users: {}
 #    pubkeys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
 
 # Create ansible mamagement user
-l3d_users_user__create_ansible: true
-l3d_users_user__ansible_user_state: 'present'
-l3d_users_user__set_ansible_ssh_keys: false
-l3d_users_user__ansible_ssh_keys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
+l3d_users__create_ansible: true
+l3d_users__ansible_user_state: 'present'
+l3d_users__set_ansible_ssh_keys: false
+l3d_users__ansible_ssh_keys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
 # run simple versionscheck
 submodules_versioncheck: false

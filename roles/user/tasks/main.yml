@@ -6,13 +6,13 @@
 
 - name: Merge default and locale Users
   ansible.builtin.set_fact:
-    _l3d_users_user__merged_users: "{{ l3d_users__default_users + l3d_users__local_users }}"
+    _l3d_users__merged_users: "{{ l3d_users__default_users + l3d_users__local_users }}"
 
 
 - name: Create ansible user with superuser permissions
   ansible.builtin.include_tasks:
     file: 'user_ansible.yml'
-  when: l3d_users_user__create_ansible | bool
+  when: l3d_users__create_ansible | bool
 
 - name: Create Groups and Users
   ansible.builtin.include_tasks:

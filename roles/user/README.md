@@ -31,10 +31,10 @@ The Option of these directory-variables are the following.
 
 | name | default value | description |
 | ---  | --- | --- |
-| l3d_users_user__create_ansible | ``true`` | Create User ansible |
-| l3d_users_user__ansible_user_state | ``present`` | Create or delete user ansible |
-| l3d_users_user__set_ansible_ssh_keys | ``false`` | Set SSH Keys for User ansible |
-| l3d_users_user__ansible_ssh_keys | | SSH public Keys. One per line or as lookup |
+| l3d_users__create_ansible | ``true`` | Create User ansible |
+| l3d_users__ansible_user_state | ``present`` | Create or delete user ansible |
+| l3d_users__set_ansible_ssh_keys | ``false`` | Set SSH Keys for User ansible |
+| l3d_users__ansible_ssh_keys | | SSH public Keys. One per line or as lookup |
 | submodules_versioncheck | ``false`` | Optionaly enable simple versionscheck of this role |
 
  Example Playbook
@@ -61,8 +61,8 @@ The Option of these directory-variables are the following.
         admin: false
         pubkeys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
 
-    l3d_users_user__create_ansible: true
-    l3d_users_user__set_ansible_ssh_keys: true
-    l3d_users_user__ansible_ssh_keys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
+    l3d_users__create_ansible: true
+    l3d_users__set_ansible_ssh_keys: true
+    l3d_users__ansible_ssh_keys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
     submodules_versioncheck: true
 ```

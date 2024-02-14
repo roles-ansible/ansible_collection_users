@@ -3,7 +3,7 @@
   become: true
   ansible.builtin.group:
     name: 'ansible'
-    state: "{{ l3d_users_user__ansible_user_state | ternary('present', 'absent') }}"
+    state: "{{ l3d_users__ansible_user_state | ternary('present', 'absent') }}"
 
 - name: Create user ansible
   become: true
@@ -12,25 +12,25 @@
     comment: 'User for ansible to login and perform tasks'
     shell: '/bin/bash'
     group: 'ansible'
-    state: "{{ l3d_users_user__ansible_user_state | ternary('present', 'absent') }}"
+    state: "{{ l3d_users__ansible_user_state | ternary('present', 'absent') }}"
     create_home: true
 
 - name: Set dedicated SSH keys for User ansible and drop all other keys
   become: true
   ansible.posix.authorized_key:
     user: 'ansible'
-    state: "{{ l3d_users_user__ansible_user_state | ternary('present', 'absent') }}"
-    key: "{{ l3d_users_user__ansible_ssh_keys }}"
+    state: "{{ l3d_users__ansible_user_state | ternary('present', 'absent') }}"
+    key: "{{ l3d_users__ansible_ssh_keys }}"
     exclusive: true
-  when: l3d_users_user__set_ansible_ssh_keys | bool
+  when: l3d_users__set_ansible_ssh_keys | bool
 
 - name: Add admin keys to user ansible
   become: true
   ansible.posix.authorized_key:
     user: 'ansible'
-    state: "{{ l3d_users_user__ansible_user_state | ternary('present', 'absent') }}"
+    state: "{{ l3d_users__ansible_user_state | ternary('present', 'absent') }}"
     key: "{{ item.pubkeys | default() }}"
-  loop: "{{ _l3d_users_user__merged_users }}"
+  loop: "{{ _l3d_users__merged_users }}"
   when: item.admin | default(false) | bool
   loop_control:
     label: "user: ['{{ item.name }}']"

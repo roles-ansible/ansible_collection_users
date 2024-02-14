@@ -4,7 +4,7 @@
   ansible.builtin.group:
     name: "{{ item.name }}"
     state: 'present'
-  loop: "{{ _l3d_users_user__merged_users }}"
+  loop: "{{ _l3d_users__merged_users }}"
   loop_control:
     label: "user: ['{{ item.name }}']"
   when: item.state | default ('present') == 'present'
@@ -19,7 +19,7 @@
     comment: "User created by ansible"
     shell: "{{ item.shell | default('/bin/bash') }}"
     password: "{{ item.password | default() }}"
-  loop: "{{ _l3d_users_user__merged_users }}"
+  loop: "{{ _l3d_users__merged_users }}"
   loop_control:
     label: "user: ['{{ item.name }}']"
   when: item.state | default ('present') == 'present'
@@ -30,7 +30,7 @@
     name: "{{ item.name }}"
     state: 'absent'
     remove: "{{ item.remove | default(false) }}"
-  loop: "{{ _l3d_users_user__merged_users }}"
+  loop: "{{ _l3d_users__merged_users }}"
   loop_control:
     label: "user: ['{{ item.name }}']"
   when: item.state | default ('present') == 'absent' and item.remove | default(false) | bool
@@ -40,7 +40,7 @@
   ansible.builtin.group:
     name: "{{ item.name }}"
     state: 'absent'
-  loop: "{{ _l3d_users_user__merged_users }}"
+  loop: "{{ _l3d_users__merged_users }}"
   loop_control:
     label: "user: ['{{ item.name }}']"
   when: item.state | default ('present') == 'absent' and item.remove | default(false) | bool
