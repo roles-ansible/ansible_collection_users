@@ -26,6 +26,11 @@
 
 - name: Add admin keys to user ansible
   become: true
-  ansible.builtin.debug:
-    msg: "tbd."
-  when: l3d_users_user__set_ansible_ssh_keys
+  ansible.posix.authorized_key:
+    user: 'ansible'
+    state: "{{ l3d_users_user__ansible_user_state | ternary('present', 'absent') }}"
+    key: "{{ item.pubkeys | default () }}"
+  loop: "{{ _l3d_users_user__merged_users }}"
+  when: item.admin | default(false) | bool
+  loop_control:
+    label: "user: ['{{ item.name }}']"
