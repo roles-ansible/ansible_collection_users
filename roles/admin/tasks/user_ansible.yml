@@ -1,0 +1,10 @@
+---
+- name: Give ansible user sudo permissions
+  become: true
+  community.general.sudoers:
+    name: 'ansible_superpowers'
+    commands: 'ALL'
+    nopassword: true
+    user: "{{ l3d_users__ansible_user_state | ternary('present', 'absent') }}"
+    validation: 'required'
+    state: 'present'

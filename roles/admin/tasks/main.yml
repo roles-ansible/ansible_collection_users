@@ -1,0 +1,22 @@
+---
+- name: Perform optional versionscheck
+  ansible.builtin.include_tasks:
+    file: 'versioncheck.yml'
+  when: submodules_versioncheck | bool
+
+- name: Install sudo
+  ansible.builtin.include_tasks:
+    file: 'sudo.yml'
+
+- name: Merge default and locale Users
+  ansible.builtin.set_fact:
+    _l3d_users__merged_users: "{{ l3d_users__default_users + l3d_users__local_users }}"
+
+- name: Give ansible user superpowes
+  ansible.builtin.include_tasks:
+    file: 'user_ansible.yml'
+  when: l3d_users__create_ansible | bool
+
+- name: Create Groups and Users
+  ansible.builtin.include_tasks:
+    file: 'users.yml'

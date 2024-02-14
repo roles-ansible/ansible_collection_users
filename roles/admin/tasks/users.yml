@@ -1,0 +1,24 @@
+---
+- name: Give admins superpower
+  become: true
+  community.general.sudoers:
+    name: "{{ item.name }}-superpowers"
+    user: "{{ item.name }}"
+    state: 'present'
+    commands: "{{ item.admin_commands | default('ALL') }}"
+    nopassword: "{{ item.admin_nopassword | default(false) }}"
+  loop: "{{ _l3d_users_user__merged_users }}"
+  loop_control:
+    label: "user: ['{{ item.name }}']"
+  when: item.state | default ('present') == 'present' and  item.admin | default(false) | bool
+
+- name: Remove superpowers from Users
+  become: true
+  community.general.sudoers:
+    name: "{{ item.name }}-superpowers"
+    state: 'absent'
+    user: "{{ item.name }}"
+  loop: "{{ _l3d_users_user__merged_users }}"
+  loop_control:
+    label: "user: ['{{ item.name }}']"
+  when: item.state | default ('present') == 'present' and not item.admin | default(false) | bool
