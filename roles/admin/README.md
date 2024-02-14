@@ -24,7 +24,7 @@ The Option of these directory-variables are the following.
 | create_home | ``true`` | create a user home *(needed to store ssh keys)* |
 | admin | ``false`` | enable it to give the user superpowers |
 | admin_commands | string or list | Commands that are allows to be run as admin, eg. 'ALL' or specific script |
-| admin_nopassword | true/false | Need no Password for sudo |
+| admin_nopassword | false | Need no Password for sudo |
 | pubkeys | string or lookup | see examples |
 | exklusive_pubkeys | ``true`` | delete all undefined ssh keys |
 | password | password hash | See [official FAQ](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module) |
