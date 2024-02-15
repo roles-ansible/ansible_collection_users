@@ -45,6 +45,7 @@ tags:
 dependencies:
   "community.general": ">=8.3.0"
   "ansible.posix": ">=1.5.4"
+  "community.crypto": ">=2.17.1"
 
 # The URL of the originating SCM repository
 repository: https://github.com/roles-ansible/ansible_collection_users.git

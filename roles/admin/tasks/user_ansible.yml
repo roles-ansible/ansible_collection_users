@@ -5,6 +5,6 @@
     name: 'ansible_superpowers'
     commands: 'ALL'
     nopassword: true
-    user: "{{ l3d_users__ansible_user_state | ternary('present', 'absent') }}"
+    user: 'ansible'
+    state: "{{ l3d_users__ansible_user_state | ternary('present', 'absent') }}"
     validation: 'required'
-    state: 'present'

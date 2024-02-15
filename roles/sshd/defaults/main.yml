@@ -1,0 +1,91 @@
+---
+# create users
+l3d_users__default_users: []
+#  - name: 'alice'
+#    state: 'present'
+#    shell: '/bin/bash'
+#    create_home: true
+#    pubkeys: |
+#       ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPvvXN33GwkTF4ZOwPgF21Un4R2z9hWUuQt1qIfzQyhC
+#       ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAG65EdcM+JLv0gnzT9LcqVU47Pkw0SqiIg7XipXENi8
+#       ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJz7zEvUVgJJJsIgfG3izsqYcM22IaKz4jGVUbNRL2PX
+#    exklusive_pubkeys: true
+#    password: "$Password_hash"
+#    admin: true
+#    admin_commands: 'ALL'
+#    admin_nopassword: false
+#  - name: 'bob'
+#    state: 'present'
+#    shell: '/bin/zsh'
+#    admin: false
+#    pubkeys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
+#    exklusive_pubkeys: false
+
+l3d_users__local_users: []
+#  - name: 'charlie'
+#    state: 'present'
+#    admin: false
+#    pubkeys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
+
+l3d_users__ssh_login: []
+# - name: 'dora'
+
+l3d_users__limit_login: true
+
+l3d_users__sshd_port: 22
+l3d_users__sshd_password_authentication: false
+
+l3d_users__sshd_manage_server_key_types: true
+l3d_users__sshd_server_key_types:
+  - ed25519
+  # - rsa
+  # - ecdsa
+
+l3d_users__sshd_manage_key_algorithmus: true
+l3d_users__sshd_key_algorithmus:
+  - 'ssh-ed25519-cert-v01@openssh.com'
+  - 'ssh-ed25519'
+  - 'ecdsa-sha2-nistp521-cert-v01@openssh.com'
+  - 'ecdsa-sha2-nistp384-cert-v01@openssh.com'
+  - 'ecdsa-sha2-nistp256-cert-v01@openssh.com'
+  # - 'rsa-sha2-512-cert-v01@openssh.com'
+  # - 'rsa-sha2-256-cert-v01@openssh.com'
+  # - 'ssh-rsa-cert-v01@openssh.com'
+  # - 'ecdsa-sha2-nistp521'
+  # - 'ecdsa-sha2-nistp384'
+  # - 'ecdsa-sha2-nistp256'
+  # - 'rsa-sha2-512'
+  # - 'rsa-sha2-256'
+  # - 'ssh-rsa'
+
+l3d_users__sshd_manage_kex_algorithmus: true
+l3d_users__sshd_kex_algorithmus:
+  - 'curve25519-sha256@libssh.org'
+  - 'diffie-hellman-group-exchange-sha256'
+  - 'diffie-hellman-group-exchange-sha1'
+  # - 'diffie-hellman-group14-sha1'
+  # - 'diffie-hellman-group1-sha1'
+
+l3d_users__sshd_manage_ciphers: true
+l3d_users__sshd_ciphers:
+  - 'chacha20-poly1305@openssh.com'
+  - 'aes256-gcm@openssh.com'
+  - 'aes256-ctr'
+  # - 'aes256-cbc'
+  # - 'aes128-ctr'
+  # - 'aes128-cbc'
+
+l3d_users__sshd_manage_macs: true
+l3d_users__sshd_macs:
+  - 'hmac-sha2-512-etm@openssh.com'
+  - 'hmac-sha2-256-etm@openssh.com'
+  - 'hmac-sha2-512'
+  # - 'hmac-sha2-256'
+  # - 'hmac-ripemd160-etm@openssh.com'
+  # - 'umac-128-etm@openssh.com'
+  # - 'hmac-sha1'
+
+l3d_users__sshd_xforwarding: true
+
+# run simple versionscheck
+submodules_versioncheck: false

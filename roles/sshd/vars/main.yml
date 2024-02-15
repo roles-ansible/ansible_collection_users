@@ -1,0 +1,11 @@
+---
+playbook_version_number: 2
+playbook_version_path: 'l3d.users.sshd.version'
+
+l3d_users_sshd__service_var_path:
+  files:
+    - "sshd_{{ ansible_distribution | lower }}.yml"
+    - "sshd_{{ ansible_os_family }}.yml"
+    - 'sshd_default.yml'
+  paths:
+    - 'vars'

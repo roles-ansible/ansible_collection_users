@@ -1,0 +1,25 @@
+---
+- name: Perform optional versionscheck
+  ansible.builtin.include_tasks:
+    file: 'versioncheck.yml'
+  when: submodules_versioncheck | bool
+
+- name: Load l3d_users_sshd_service variable
+  ansible.builtin.include_vars: "{{ lookup('first_found', l3d_users_sshd__service_var_path) }}"
+
+- name: Install openssh server
+  ansible.builtin.include_tasks:
+    file: 'packages.yml'
+
+- name: Merge default and locale Users
+  ansible.builtin.set_fact:
+    _l3d_users__merged_users: "{{ l3d_users__default_users + l3d_users__local_users + l3d_users__ssh_login }}"
+
+- name: Manage Server SSH Keys
+  ansible.builtin.include_tasks:
+    file: 'server_keys.yml'
+  when: l3d_users__sshd_manage_server_key_types | bool
+
+- name: Create SSHD Config
+  ansible.builtin.include_tasks:
+    file: 'sshd_config.yml'

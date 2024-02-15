@@ -1,0 +1,34 @@
+---
+- name: Generate new ssh host key pair if necessary
+  become: true
+  community.crypto.openssh_keypair:
+    path: "/etc/ssh/ssh_host_{{ item }}_key"
+    type: "{{ item }}"
+    group: root
+    mode: '0600'
+    owner: 'root'
+  with_items: "{{ l3d_users__sshd_server_key_types }}"
+  when:
+    - l3d_users__sshd_manage_server_key_types | bool
+  notify:
+    - 'systemctl restart sshd'
+
+- name: Make sure only the correct keys are available
+  ansible.builtin.file:
+    path: '/etc/ssh/ssh_host_{{ item }}_key'
+    state: absent
+  become: true
+  with_items:
+    - "{{ l3d_users__sshd_key_types_list | difference(l3d_users__sshd_server_key_types) }}"
+  notify:
+    - 'systemctl restart sshd'
+
+- name: Make sure only the correct pubkeys are available
+  ansible.builtin.file:
+    path: '/etc/ssh/ssh_host_{{ item }}_key.pub'
+    state: absent
+  become: true
+  with_items:
+    - "{{ l3d_users__sshd_key_types_list | difference(l3d_users__sshd_server_key_types) }}"
+  notify:
+    - 'systemctl restart sshd'

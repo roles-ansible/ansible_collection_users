@@ -1,0 +1,12 @@
+---
+l3d_users__sshd_service: 'sshd'
+l3d_users__sshd_key_types_list:
+  - 'ed25519'
+  - 'rsa'
+  - 'ecdsa'
+  - 'dsa'
+
+l3d_users__sshd_xauth:
+  - 'xorg-xauth'
+
+l3d_users__sshd_package: 'openssh'
