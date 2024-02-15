@@ -34,7 +34,9 @@ The Option of these directory-variables are the following.
 
 | name | default value | description |
 | ---  | --- | --- |
-| submodules_versioncheck | ``false`` | Optionaly enable simple versionscheck of this role |
+| ``l3d_users__create_ansible`` | ``true`` | Create an Ansible User |
+| ``l3d_users__ansible_user_state`` | ``present`` | Ansible user state |
+| ``submodules_versioncheck`` | ``false`` | Optionaly enable simple versionscheck of this role |
 
  Example Playbook
 -----------------

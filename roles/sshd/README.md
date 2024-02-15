@@ -1,7 +1,7 @@
  Ansible Role SSHD
 ====================
 
-Ansible role l3d.users.sshd to Manage SSHD Configuration of the system and which Users are allowed to login.
+Ansible role l3d.users.sshd to Manage SSHD Configuration of the system and which Accounts are allowed to login.
 
 # WORK IN PROGRESS
 
@@ -30,11 +30,34 @@ The Option of these directory-variables are the following.
 | password | password hash | See [official FAQ](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module) |
 | remove | ``false`` | completly remove user if state is absent |
 
-### Other
+There is a third directory-variable called ``l3d_users__ssh_login: []`` which only support ``name`` and ``state`` for users, that sould be able to login on that system.
+
+### Other Variables
 
 | name | default value | description |
 | ---  | --- | --- |
-| submodules_versioncheck | ``false`` | Optionaly enable simple versionscheck of this role |
+| ``submodules_versioncheck`` | ``false`` | Optionaly enable simple versionscheck of this role |
+| ``l3d_users__limit_login`` | ``true`` | Only allow SSH login for specified users |
+| ``l3d_users__sshd_port`` | ``22`` | Port for SSH |
+| ``l3d_users__sshd_password_authentication`` | ``false`` | Allow login with Password |
+| ``l3d_users__sshd_permitrootlogin`` | ``false`` | Allow login as root |
+| ``l3d_users__create_ansible`` | ``true`` | Create Ansible User |
+| ``l3d_users__ansible_user_state`` | ``present`` | Ansible User State |
+| ``l3d_users__sshd_manage_server_key_types`` | ``true`` | Manage Server SSH Key types |
+| ``l3d_users__sshd_server_key_types`` | ``['ed25519']`` | List of supported SSH Key Types |
+| ``l3d_users__sshd_manage_key_algorithmus`` | ``true`` | Manage SSH Key Algorythmins |
+| ``l3d_users__sshd_key_algorithmus`` | ``['ssh-ed25519-cert-v01@openssh.com', 'ssh-ed25519', 'ecdsa-sha2-nistp521-cert-v01@openssh.com', 'ecdsa-sha2-nistp384-cert-v01@openssh.com', 'ecdsa-sha2-nistp256-cert-v01@openssh.com']`` | Used SSH Key Algorithms |
+| ``l3d_users__sshd_manage_kex_algorithmus`` | ``true`` | Manage SSH Kex Algorythms |
+| ``l3d_users__sshd_kex_algorithmus`` | ``['curve25519-sha256@libssh.org', 'diffie-hellman-group-exchange-sha256', 'diffie-hellman-group-exchange-sha1']`` | Used Kex Algorythms |
+| ``l3d_users__sshd_manage_ciphers`` | ``true`` | Manage SSH Ciphers |
+| ``l3d_users__sshd_ciphers`` | ``['chacha20-poly1305@openssh.com', 'aes256-gcm@openssh.com', 'aes256-ctr']`` | Used SSH Ciphers |
+| ``l3d_users__sshd_manage_macs`` | ``true`` | Manage Used MACs |
+| ``l3d_users__sshd_macs`` | ``['hmac-sha2-512-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'hmac-sha2-512']`` | Used MACs |
+| ``l3d_users__sshd_xforwarding`` |``true`` | Enable X-Forwarding |
+
+# run simple versionscheck
+submodules_versioncheck: false
+
 
  Example Playbook
 -----------------
@@ -42,27 +65,18 @@ The Option of these directory-variables are the following.
 - name: Create System with User and Passwords
   hosts: example.com
   roles:
-    - {role: l3d.users.user, tags: 'user'}
+    - {role: l3d.users.sshd, tags: 'sshd'}
   vars:
     l3d_users__local_users:
       - name: 'alice'
         state: 'present'
-        shell: '/bin/bash'
-        create_home: true
-        admin: true
-        admin_commands: 'ALL'
-        pubkeys: |
-          ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPvvXN33GwkTF4ZOwPgF21Un4R2z9hWUuQt1qIfzQyhC
-          ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAG65EdcM+JLv0gnzT9LcqVU47Pkw0SqiIg7XipXENi8
-          ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJz7zEvUVgJJJsIgfG3izsqYcM22IaKz4jGVUbNRL2PX
-        exklusive_pubkeys: true
       - name: 'bob'
         state: 'present'
-        admin: false
-        pubkeys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
+    l3d_users__ssh_login:
+      - name: 'charlie'
+        state: 'present'
 
+    l3d_users__limit_login: true
     l3d_users__create_ansible: true
-    l3d_users__set_ansible_ssh_keys: true
-    l3d_users__ansible_ssh_keys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
     submodules_versioncheck: true
 ```

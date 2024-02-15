@@ -27,5 +27,8 @@ l3d_users__local_users: {}
 #    admin: false
 #    pubkeys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
 
+l3d_users__create_ansible: true
+l3d_users__ansible_user_state: 'present'
+
 # run simple versionscheck
 submodules_versioncheck: false

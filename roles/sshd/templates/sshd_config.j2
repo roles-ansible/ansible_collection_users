@@ -4,7 +4,7 @@
 # This is the sshd server system-wide configuration file.  See
 # sshd_config(5) for more information.
 
-{% if _sshd_version | default(7) > 8.0 | bool %}
+{% if _sshd_version | default(7.0) | float > 8.0 | bool %}
 # Include SSHD config snippets
 # Support fot this starts with sshd 8.0
 Include /etc/ssh/sshd_config.d/*.conf
