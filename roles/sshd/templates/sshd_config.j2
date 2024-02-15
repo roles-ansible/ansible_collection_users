@@ -4,13 +4,14 @@
 # This is the sshd server system-wide configuration file.  See
 # sshd_config(5) for more information.
 
-{% if sshd__version_is_above_eight | default(false) | bool %}
+{% if _sshd_version | default(7) > 8.0 | bool %}
 # Include SSHD config snippets
+# Support fot this starts with sshd 8.0
 Include /etc/ssh/sshd_config.d/*.conf
 {% endif %}
 
 # Networking
-Port {{ sshd__port }}
+Port {{ l3d_users__sshd_port }}
 AddressFamily any
 #ListenAddress 0.0.0.0
 #ListenAddress ::
@@ -18,41 +19,34 @@ AddressFamily any
 TCPKeepAlive yes
 
 # SSHD Key exchange
+{% if l3d_users__sshd_manage_key_algorithmus | bool %}
 # -> HostkeyAlgorithms
-{% if not sshd__manage_key_algorithmus | bool %}#{% endif -%}
-{{ 'HostkeyAlgorithms ' }}
-{%- for algo in sshd__key_algorithmus -%}
-  {{- algo -}}
-  {{- "," if not loop.last -}}
-{%- endfor %}
+HostkeyAlgorithms {{ l3d_users__sshd_key_algorithmus | join(',') }}
+{% else %}
+# No HostkeyAlgorithms defined
+{% endif %}
 
+{% if l3d_users__sshd_manage_kex_algorithmus | bool %}
 # -> KexAlgorithms
-{% if not sshd__manage_kex_algorithmus | bool %}#{% endif -%}
-{{ 'KexAlgorithms ' }}
-{%- for algo in sshd__kex_algorithmus -%}
-  {{- algo -}}
-  {{- "," if not loop.last -}}
-{%- endfor %}
-
+KexAlgorithms {{ l3d_users__sshd_kex_algorithmus | join(',') }}
+{% else %}
+# No KexAlgorithms defined
+{% endif %}
 
 # Ciphers and keying
-# RekeyLimit default none
+{% if l3d_users__sshd_manage_ciphers | bool %}
 # -> Ciphers
-{% if not sshd__manage_ciphers | bool %}#{% endif -%}
-{{ 'Ciphers ' }}
-{%- for cipher in sshd__ciphers -%}
-  {{- cipher -}}
-  {{- "," if not loop.last -}}
-{%- endfor %}
+Ciphers {{ l3d_users__sshd_ciphers | join(',') }}
+{% else %}
+# No Ciphers defined
+{% endif %}
 
-
+{% if l3d_users__sshd_manage_macs | bool %}
 # -> Macs
-{% if not sshd__manage_macs | bool %}#{% endif -%}
-{{ 'MACs ' }}
-{%- for mac in sshd__macs -%}
-  {{- mac -}}
-  {{- "," if not loop.last -}}
-{%- endfor %}
+MACs {{ l3d_users__sshd_macs | join(',') }}
+{% else %}
+# No MACs defined
+{% endif %}
 
 # Server Authentication
 Protocol 2
@@ -62,23 +56,23 @@ SyslogFacility AUTH
 LogLevel INFO
 
 # SSHD Host Keys
-{% for key in sshd__key_types %}
+{% if l3d_users__sshd_manage_server_key_types | bool %}
+{%     for key in l3d_users__sshd_server_key_types %}
 # -> {{ key }}
-{% if not sshd__manage_key_types | bool %}#{% endif -%}
 HostKey /etc/ssh/ssh_host_{{ key }}_key
-{% endfor %}
-
+{%     endfor %}
+{% endif %}
 
 # Client authentication
 MaxAuthTries 6
 MaxSessions 10
-PasswordAuthentication {{ sshd__password_authentication | ternary('yes', 'no') }}
+PasswordAuthentication {{ l3d_users__sshd_password_authentication | ternary('yes', 'no') }}
 ChallengeResponseAuthentication no
 PubkeyAuthentication yes
-PermitRootLogin without-password
+PermitRootLogin {{ l3d_users__sshd_permitrootlogin | ternary('without-password', 'no') }}
 LoginGraceTime 120
 StrictModes yes
-X11Forwarding {{ sshd__xforwarding | ternary('yes', 'no') }}
+X11Forwarding {{ l3d_users__sshd_xforwarding | ternary('yes', 'no') }}
 
 AllowTcpForwarding yes
 #GatewayPorts no
@@ -110,13 +104,25 @@ TCPKeepAlive yes
 # and ChallengeResponseAuthentication to 'no'.
 UsePAM yes
 
+{% set _sshd_accounts = [] %}
+{% for user in _l3d_users__merged_users %}
+{%     if user.name is defined and user.state | default('present') == 'present' %}
+{%         set _ = _sshd_accounts.append(user.name) %}
+{%     endif %}
+{% endfor %}
+
 # User Authentication
-{% if not sshd__restrict_users -%}#{%- endif -%}
-AllowUsers {{ sshd__allowed_users|join(' ') }}
+{% if l3d_users__create_ansible | bool and l3d_users__ansible_user_state == 'present' %}
+AllowUsers ansible {{ _sshd_accounts | join(' ') }}
 
 # Group Authentication
-{% if not sshd__restrict_groups -%}#{%- endif -%}
-AllowGroups {{ sshd__allowed_groups|join(' ') }}
+AllowGroups ansible {{ _sshd_accounts | join(' ') }}
+{% else %}
+AllowUsers {{ _sshd_accounts | join(' ') }}
+
+# Group Authentication
+AllowGroups {{ _sshd_accounts | join(' ') }}
+{% endif %}
 
 # Allow client to pass locale environment variables
 AcceptEnv LANG LC_*

@@ -29,17 +29,21 @@ l3d_users__local_users: []
 
 l3d_users__ssh_login: []
 # - name: 'dora'
+#   state: 'present'
 
 l3d_users__limit_login: true
 
 l3d_users__sshd_port: 22
 l3d_users__sshd_password_authentication: false
+l3d_users__sshd_permitrootlogin: false
+l3d_users__create_ansible: true
+l3d_users__ansible_user_state: 'present'
 
 l3d_users__sshd_manage_server_key_types: true
 l3d_users__sshd_server_key_types:
-  - ed25519
-  # - rsa
-  # - ecdsa
+  - 'ed25519'
+  # - 'rsa'
+  # - 'ecdsa'
 
 l3d_users__sshd_manage_key_algorithmus: true
 l3d_users__sshd_key_algorithmus:
