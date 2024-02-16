@@ -3,8 +3,6 @@
 
 Ansible role l3d.users.sshd to Manage SSHD Configuration of the system and which Accounts are allowed to login.
 
-# WORK IN PROGRESS
-
 There are two variables to define users. The ``l3d_users__default_users`` is ment to put to your group_vars to define a default for your system. The ``l3d_users__local_users`` could be put in your host_vars to define host-specific user and admin roles.
 
  Variables:
@@ -16,19 +14,20 @@ There are two variables to define users. The ``l3d_users__default_users`` is men
 + The dictionary-variable for your host_vars to set your host-specific users and admins is: ``l3d_users__local_users``.
 The Option of these directory-variables are the following.
 
-| option | values | description |
-| ------ | ------ | --- |
-| name   | string | The user you want to create |
-| state  | ``present`` | Create or delete user |
-| shell | ``/bin/bash`` | The Shell of the User |
-| create_home | ``true`` | create a user home *(needed to store ssh keys)* |
-| admin | ``false`` | enable it to give the user superpowers |
-| admin_commands | string or list | Commands that are allows to be run as admin, eg. 'ALL' or specific script |
-| admin_nopassword | false | Need no Password for sudo |
-| pubkeys | string or lookup | see examples |
-| exklusive_pubkeys | ``true`` | delete all undefined ssh keys |
-| password | password hash | See [official FAQ](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module) |
-| remove | ``false`` | completly remove user if state is absent |
+| option | values | required | description |
+| ------ | ------ | --- | --- |
+| ``name``   | *string* | ``required`` | The user you want to create |
+| ``state``  | ``present`` | - | Create or delete user |
+| ``shell`` | ``/bin/bash`` | - | The Shell of the User |
+| ``create_home`` | ``true`` | - | create a user home *(needed to store ssh keys)* |
+| ``admin | ``false`` | - | enable it to give the user superpowers |
+| ``admin_commands`` | *string or list* | - | Commands that are allows to be run as admin, eg. 'ALL' or specific script |
+| ``admin_nopassword`` | ``false`` | - | Need no Password for sudo |
+| ``admin_ansible_login`` | ``true`` | - |if ``admin: true`` and ``l3d_users__create_ansible: true`` your ssh keys will be added to ansible user |
+| ``pubkeys`` | string or lookup | - | see examples |
+| ``exklusive_pubkeys`` | ``true`` | - | delete all undefined ssh keys |
+| ``password`` | password hash | - | See [official FAQ](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module) |
+| ``remove`` | ``false`` | - | completly remove user if ``state: absent`` |
 
 There is a third directory-variable called ``l3d_users__ssh_login: []`` which only support ``name`` and ``state`` for users, that sould be able to login on that system.
 
@@ -36,7 +35,6 @@ There is a third directory-variable called ``l3d_users__ssh_login: []`` which on
 
 | name | default value | description |
 | ---  | --- | --- |
-| ``submodules_versioncheck`` | ``false`` | Optionaly enable simple versionscheck of this role |
 | ``l3d_users__limit_login`` | ``true`` | Only allow SSH login for specified users |
 | ``l3d_users__sshd_port`` | ``22`` | Port for SSH |
 | ``l3d_users__sshd_password_authentication`` | ``false`` | Allow login with Password |
@@ -54,10 +52,7 @@ There is a third directory-variable called ``l3d_users__ssh_login: []`` which on
 | ``l3d_users__sshd_manage_macs`` | ``true`` | Manage Used MACs |
 | ``l3d_users__sshd_macs`` | ``['hmac-sha2-512-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'hmac-sha2-512']`` | Used MACs |
 | ``l3d_users__sshd_xforwarding`` |``true`` | Enable X-Forwarding |
-
-# run simple versionscheck
-submodules_versioncheck: false
-
+| ``submodules_versioncheck`` | ``false`` | Optionaly enable simple versionscheck of this role |
 
  Example Playbook
 -----------------

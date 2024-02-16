@@ -13,6 +13,7 @@
     shell: '/bin/bash'
     group: 'ansible'
     state: "{{ l3d_users__ansible_user_state | ternary('present', 'absent') }}"
+    password: "{{ l3d_users__ansible_user_password }}"
     create_home: true
 
 - name: Set dedicated SSH keys for User ansible and drop all other keys
@@ -31,6 +32,6 @@
     state: "{{ l3d_users__ansible_user_state | ternary('present', 'absent') }}"
     key: "{{ item.pubkeys | default() }}"
   loop: "{{ _l3d_users__merged_users }}"
-  when: item.admin | default(false) | bool
+  when: item.admin | default(false) | bool and item.admin_ansible_login | default(true) | bool
   loop_control:
     label: "user: ['{{ item.name }}']"

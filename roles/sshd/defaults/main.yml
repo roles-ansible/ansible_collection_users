@@ -14,6 +14,7 @@ l3d_users__default_users: []
 #    admin: true
 #    admin_commands: 'ALL'
 #    admin_nopassword: false
+#    admin_ansible_login: true
 #  - name: 'bob'
 #    state: 'present'
 #    shell: '/bin/zsh'

@@ -15,29 +15,31 @@ There are two variables to define users. The ``l3d_users__default_users`` is men
 + The dictionary-variable for your host_vars to set your host-specific users and admins is: ``l3d_users__local_users``.
 The Option of these directory-variables are the following.
 
-| option | values | description |
-| ------ | ------ | --- |
-| name   | string | The user you want to create |
-| state  | ``present`` | Create or delete user |
-| shell | ``/bin/bash`` | The Shell of the User |
-| create_home | ``true`` | create a user home *(needed to store ssh keys)* |
-| admin | ``false`` | enable it to give the user superpowers |
-| admin_commands | string or list | Commands that are allows to be run as admin, eg. 'ALL' or specific script |
-| admin_nopassword | false | Need no Password for sudo |
-| pubkeys | string or lookup | see examples |
-| exklusive_pubkeys | ``true`` | delete all undefined ssh keys |
-| password | password hash | See [official FAQ](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module) |
-| remove | ``false`` | completly remove user if state is absent |
+| option | values | required | description |
+| ------ | ------ | --- | --- |
+| ``name``   | *string* | ``required`` | The user you want to create |
+| ``state``  | ``present`` | - | Create or delete user |
+| ``shell`` | ``/bin/bash`` | - | The Shell of the User |
+| ``create_home`` | ``true`` | - | create a user home *(needed to store ssh keys)* |
+| ``admin | ``false`` | - | enable it to give the user superpowers |
+| ``admin_commands`` | *string or list* | - | Commands that are allows to be run as admin, eg. 'ALL' or specific script |
+| ``admin_nopassword`` | ``false`` | - | Need no Password for sudo |
+| ``admin_ansible_login`` | ``true`` | - | if ``admin: true`` and ``l3d_users__create_ansible: true`` your ssh keys will be added to ansible user |
+| ``pubkeys`` | string or lookup | - | see examples |
+| ``exklusive_pubkeys`` | ``true`` | - | delete all undefined ssh keys |
+| ``password`` | password hash | - | See [official FAQ](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module) |
+| ``remove`` | ``false`` | - | completly remove user if ``state: absent`` |
 
-### Other
+### Other Variables
 
 | name | default value | description |
 | ---  | --- | --- |
-| l3d_users__create_ansible | ``true`` | Create User ansible |
-| l3d_users__ansible_user_state | ``present`` | Create or delete user ansible |
-| l3d_users__set_ansible_ssh_keys | ``false`` | Set SSH Keys for User ansible |
-| l3d_users__ansible_ssh_keys | | SSH public Keys. One per line or as lookup |
-| submodules_versioncheck | ``false`` | Optionaly enable simple versionscheck of this role |
+| ``l3d_users__create_ansible`` | ``true`` | Create User ansible |
+| ``l3d_users__ansible_user_state`` | ``present`` | Create or delete user ansible |
+| ``l3d_users__set_ansible_ssh_keys`` | ``false`` | Set SSH Keys for User ansible |
+| ``l3d_users__ansible_ssh_keys`` | | SSH public Keys. One per line or as lookup |
+| ``l3d_users__ansible_user_password`` | | Set optional Password for Ansible User, see [official FAQ](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module) |
+| ``submodules_versioncheck`` | ``false`` | Optionaly enable simple versionscheck of this role |
 
  Example Playbook
 -----------------

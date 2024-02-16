@@ -3,8 +3,8 @@
   become: true
   community.general.sudoers:
     name: 'ansible_superpowers'
-    commands: 'ALL'
-    nopassword: true
+    commands: "{{ l3d_users__ansible_user_command }}"
+    nopassword: "{{ l3d_users__ansible_user_nopassword | bool }}"
     user: 'ansible'
     state: "{{ l3d_users__ansible_user_state | ternary('present', 'absent') }}"
     validation: 'required'

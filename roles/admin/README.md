@@ -16,19 +16,20 @@ There are two variables to define users. The ``l3d_users__default_users`` is men
 + The dictionary-variable for your host_vars to set your host-specific users and admins is: ``l3d_users__local_users``.
 The Option of these directory-variables are the following.
 
-| option | values | description |
-| ------ | ------ | --- |
-| name   | string | The user you want to create |
-| state  | ``present`` | Create or delete user |
-| shell | ``/bin/bash`` | The Shell of the User |
-| create_home | ``true`` | create a user home *(needed to store ssh keys)* |
-| admin | ``false`` | enable it to give the user superpowers |
-| admin_commands | string or list | Commands that are allows to be run as admin, eg. 'ALL' or specific script |
-| admin_nopassword | false | Need no Password for sudo |
-| pubkeys | string or lookup | see examples |
-| exklusive_pubkeys | ``true`` | delete all undefined ssh keys |
-| password | password hash | See [official FAQ](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module) |
-| remove | ``false`` | completly remove user if state is absent |
+| option | values | required | description |
+| ------ | ------ | --- | --- |
+| ``name``   | *string* | ``required`` | The user you want to create |
+| ``state``  | ``present`` | - | Create or delete user |
+| ``shell`` | ``/bin/bash`` | - | The Shell of the User |
+| ``create_home`` | ``true`` | - | create a user home *(needed to store ssh keys)* |
+| ``admin | ``false`` | - | enable it to give the user superpowers |
+| ``admin_commands`` | *string or list* | - | Commands that are allows to be run as admin, eg. 'ALL' or specific script |
+| ``admin_nopassword`` | ``false`` | - | Need no Password for sudo |
+| ``admin_ansible_login`` | ``true`` | - |if ``admin: true`` and ``l3d_users__create_ansible: true`` your ssh keys will be added to ansible user |
+| ``pubkeys`` | string or lookup | - | see examples |
+| ``exklusive_pubkeys`` | ``true`` | - | delete all undefined ssh keys |
+| ``password`` | password hash | - | See [official FAQ](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module) |
+| ``remove`` | ``false`` | - | completly remove user if ``state: absent`` |
 
 ### Other
 
@@ -36,35 +37,34 @@ The Option of these directory-variables are the following.
 | ---  | --- | --- |
 | ``l3d_users__create_ansible`` | ``true`` | Create an Ansible User |
 | ``l3d_users__ansible_user_state`` | ``present`` | Ansible user state |
+| ``l3d_users__ansible_user_command`` | ``ALL`` | Commans with superpower for ansible user |
+| ``l3d_users__ansible_user_nopassword`` | ``true`` | Allow superpowers without password for ansible user |
 | ``submodules_versioncheck`` | ``false`` | Optionaly enable simple versionscheck of this role |
 
  Example Playbook
 -----------------
 ```yaml
-- name: Create System with User and Passwords
+- name: Create superpowers for admins
   hosts: example.com
   roles:
-    - {role: l3d.users.user, tags: 'user'}
+    - {role: l3d.users.admin, tags: 'admin'}
   vars:
     l3d_users__local_users:
       - name: 'alice'
         state: 'present'
-        shell: '/bin/bash'
-        create_home: true
         admin: true
         admin_commands: 'ALL'
-        pubkeys: |
-          ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPvvXN33GwkTF4ZOwPgF21Un4R2z9hWUuQt1qIfzQyhC
-          ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAG65EdcM+JLv0gnzT9LcqVU47Pkw0SqiIg7XipXENi8
-          ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJz7zEvUVgJJJsIgfG3izsqYcM22IaKz4jGVUbNRL2PX
-        exklusive_pubkeys: true
+        admin_nopassword: false
+        pubkeys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
       - name: 'bob'
         state: 'present'
         admin: false
-        pubkeys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
-
+      - name: 'backup'
+        state: 'present'
+        admin: true
+        admin_commands: '/opt/backupscript.sh'
+        admin_nopassword: true
+        admin_ansible_login: false
     l3d_users__create_ansible: true
-    l3d_users__set_ansible_ssh_keys: true
-    l3d_users__ansible_ssh_keys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
     submodules_versioncheck: true
 ```

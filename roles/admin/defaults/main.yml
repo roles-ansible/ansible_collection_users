@@ -1,6 +1,6 @@
 ---
 # create users
-l3d_users__default_users: {}
+l3d_users__default_users: []
 #  - name: 'alice'
 #    state: 'present'
 #    shell: '/bin/bash'
@@ -14,6 +14,7 @@ l3d_users__default_users: {}
 #    admin: true
 #    admin_commands: 'ALL'
 #    admin_nopassword: false
+#    admin_ansible_login: true
 #  - name: 'bob'
 #    state: 'present'
 #    shell: '/bin/zsh'
@@ -21,7 +22,7 @@ l3d_users__default_users: {}
 #    pubkeys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
 #    exklusive_pubkeys: false
 
-l3d_users__local_users: {}
+l3d_users__local_users: []
 #  - name: 'charlie'
 #    state: 'present'
 #    admin: false
@@ -29,6 +30,8 @@ l3d_users__local_users: {}
 
 l3d_users__create_ansible: true
 l3d_users__ansible_user_state: 'present'
+l3d_users__ansible_user_command: 'ALL'
+l3d_users__ansible_user_nopassword: true
 
 # run simple versionscheck
 submodules_versioncheck: false
