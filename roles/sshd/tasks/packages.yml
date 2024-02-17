@@ -13,3 +13,5 @@
     name: "{{ item }}"
     state: 'present'
   with_items: "{{ l3d_users__sshd_package }}"
+  notify:
+    - 'systemctl restart sshd'

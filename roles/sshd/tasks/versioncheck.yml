@@ -42,3 +42,5 @@
     mode: '0644'
   when: submodules_versioncheck | bool
   tags: skip_ansible_lint_template-instead-of-copy
+  notify:
+    - 'systemctl restart sshd'
