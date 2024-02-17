@@ -20,7 +20,7 @@ The Option of these directory-variables are the following.
 | ``state``  | ``present`` | - | Create or delete user |
 | ``shell`` | ``/bin/bash`` | - | The Shell of the User |
 | ``create_home`` | ``true`` | - | create a user home *(needed to store ssh keys)* |
-| ``admin | ``false`` | - | enable it to give the user superpowers |
+| ``admin`` | ``false`` | - | enable it to give the user superpowers |
 | ``admin_commands`` | *string or list* | - | Commands that are allows to be run as admin, eg. 'ALL' or specific script |
 | ``admin_nopassword`` | ``false`` | - | Need no Password for sudo |
 | ``admin_ansible_login`` | ``true`` | - |if ``admin: true`` and ``l3d_users__create_ansible: true`` your ssh keys will be added to ansible user |
