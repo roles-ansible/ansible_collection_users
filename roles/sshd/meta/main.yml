@@ -9,13 +9,10 @@ galaxy_info:
     - name: Debian
       versions: ['all']
     - name: Ubuntu
-      versions:
       versions: ['all']
     - name: Fedora
-      versions:
       versions: ['all']
     - name: EL
-      versions:
       versions: ['all']
   galaxy_tags:
     - sshd
