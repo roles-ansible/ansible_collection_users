@@ -2,23 +2,25 @@
 - name: Give admins superpower
   become: true
   community.general.sudoers:
-    name: "{{ item.name }}-superpowers"
-    user: "{{ item.name }}"
+    name: "{{ user.name }}-superpowers"
+    user: "{{ user.name }}"
     state: 'present'
-    commands: "{{ item.admin_commands | default('ALL') }}"
-    nopassword: "{{ item.admin_nopassword | default(false) }}"
+    commands: "{{ user.admin_commands | default('ALL') }}"
+    nopassword: "{{ user.admin_nopassword | default(false) }}"
   loop: "{{ _l3d_users__merged_users }}"
   loop_control:
-    label: "user: ['{{ item.name }}']"
-  when: item.state | default ('present') == 'present' and  item.admin | default(false) | bool
+    label: "user={{ user.name }}"
+    loop_var: user
+  when: user.state | default ('present') == 'present' and  user.admin | default(false) | bool
 
 - name: Remove superpowers from Users
   become: true
   community.general.sudoers:
-    name: "{{ item.name }}-superpowers"
+    name: "{{ user.name }}-superpowers"
     state: 'absent'
-    user: "{{ item.name }}"
+    user: "{{ user.name }}"
   loop: "{{ _l3d_users__merged_users }}"
   loop_control:
-    label: "user: ['{{ item.name }}']"
-  when: item.state | default ('present') == 'present' and not item.admin | default(false) | bool
+    label: "user={{ user.name }}"
+    loop_var: user
+  when: user.state | default ('present') == 'present' and not user.admin | default(false) | bool

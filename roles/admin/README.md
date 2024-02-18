@@ -1,7 +1,7 @@
  Ansible Role Admin
 ====================
 
-Ansible role l3d.users.admin Manage Admin-Permissions of Users.
+Ansible role l3d.users.admin to manage Admin-Permissions of Users.
 
 # WORK IN PROGRESS
 

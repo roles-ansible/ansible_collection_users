@@ -2,45 +2,49 @@
 - name: Create Groups for Users
   become: true
   ansible.builtin.group:
-    name: "{{ item.name }}"
+    name: "{{ user.name }}"
     state: 'present'
   loop: "{{ _l3d_users__merged_users }}"
   loop_control:
-    label: "user: ['{{ item.name }}']"
-  when: item.state | default ('present') == 'present'
+    label: "user={{ user.name }}"
+    loop_var: user
+  when: user.state | default ('present') == 'present'
 
 - name: Create Accounts for Users
   become: true
   ansible.builtin.user:
-    name: "{{ item.name }}"
-    group: "{{ item.name }}"
+    name: "{{ user.name }}"
+    group: "{{ user.name }}"
     state: 'present'
-    create_home: "{{ item.create_home | default(true) }}"
+    create_home: "{{ user.create_home | default(true) }}"
     comment: "User created by ansible"
-    shell: "{{ item.shell | default('/bin/bash') }}"
-    password: "{{ item.password | default() }}"
+    shell: "{{ user.shell | default('/bin/bash') }}"
+    password: "{{ user.password | default() }}"
   loop: "{{ _l3d_users__merged_users }}"
   loop_control:
-    label: "user: ['{{ item.name }}']"
-  when: item.state | default ('present') == 'present'
+    label: "user={{ user.name }}"
+    loop_var: user
+  when: user.state | default ('present') == 'present'
 
 - name: Remove Accounts for Users
   become: true
   ansible.builtin.user:
-    name: "{{ item.name }}"
+    name: "{{ user.name }}"
     state: 'absent'
-    remove: "{{ item.remove | default(false) }}"
+    remove: "{{ user.remove | default(false) }}"
   loop: "{{ _l3d_users__merged_users }}"
   loop_control:
-    label: "user: ['{{ item.name }}']"
-  when: item.state | default ('present') == 'absent' and item.remove | default(false) | bool
+    label: "user={{ user.name }}"
+    loop_var: user
+  when: user.state | default ('present') == 'absent' and user.remove | default(false) | bool
 
 - name: Remove Groups for Users
   become: true
   ansible.builtin.group:
-    name: "{{ item.name }}"
+    name: "{{ user.name }}"
     state: 'absent'
   loop: "{{ _l3d_users__merged_users }}"
   loop_control:
-    label: "user: ['{{ item.name }}']"
-  when: item.state | default ('present') == 'absent' and item.remove | default(false) | bool
+    label: "user={{ user.name }}"
+    loop_var: user
+  when: user.state | default ('present') == 'absent' and user.remove | default(false) | bool
