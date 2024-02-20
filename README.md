@@ -1,4 +1,9 @@
-# Ansible Collection l3d.users
+[![collection l3d.git](https://ansible.l3d.space/svg/l3d.users_ansible-collection_collection.svg)](https://galaxy.ansible.com/ui/repo/published/l3d/users/)
+[![Maintainance](https://ansible.l3d.space/svg/l3d.users_maintainance_collection.svg)](https://ansible.l3d.space/#l3d.users)
+[![License](https://ansible.l3d.space/svg/l3d.users_license_collection.svg)](LICENSE)
+ 
+ Ansible Collection l3d.users
+===============================
 Ansible Collection to manage Users, Groups and SSH Keys.
 
 There are multiple ansible roles in this collection. Togehter they can setup an unix system with proper users, groups and if they need it supoerpowers. The user could get SSH Keys or a Password. It is also possible to limit the login via SSH to the defined users.
@@ -7,9 +12,9 @@ And it is possible to delete users too.
  Ansible Roles:
 -----------------
 *Please note, it is pretty useless to add an ssh key to an non-existing user directory. So please add users first before running other roles*
-+ ``l3d.users.user``: [roles/user](roles/user)
-+ ``l3d.users.admin``: [roles/admin](roles/admin)
-+ ``l3d.users.sshd``: [roles/sshd](roles/admin)
++ ``l3d.users.user``: [roles/user](roles/user) ![logo](https://ansible.l3d.space/svg/l3d.users.user_ansible-role.svg)
++ ``l3d.users.admin``: [roles/admin](roles/admin) ![logo](https://ansible.l3d.space/svg/l3d.users.admin_ansible-role.svg)
++ ``l3d.users.sshd``: [roles/sshd](roles/admin) ![logo](https://ansible.l3d.space/svg/l3d.users.sshd_ansible-role.svg)
 
  Global Variables:
 -------------------
