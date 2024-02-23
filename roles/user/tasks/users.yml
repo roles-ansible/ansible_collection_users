@@ -15,6 +15,7 @@
   ansible.builtin.user:
     name: "{{ user.name }}"
     group: "{{ user.name }}"
+    groups: "{{ user.groups | default() }}"
     state: 'present'
     create_home: "{{ user.create_home | default(true) }}"
     comment: "User created by ansible"
