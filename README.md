@@ -16,6 +16,37 @@ And it is possible to delete users too.
 + ``l3d.users.admin``: [roles/admin](roles/admin) ![logo](https://ansible.l3d.space/svg/l3d.users.admin_ansible-role.svg)
 + ``l3d.users.sshd``: [roles/sshd](roles/admin) ![logo](https://ansible.l3d.space/svg/l3d.users.sshd_ansible-role.svg)
 
+## Using this Collection
+You can install the collection using ansible-galaxy by running:
+```bash
+ansible-galaxy collection install l3d.users:1.0.1
+```
+
+Remember you can to Upgrade to the latest version of the l3d.git collection using the ``--upgrade`` parameter:
+```bash
+ansible-galaxy collection install l3d.users --upgrade
+```
+
+Or you could clone this collection in your local ansible project for example to ``collections/ansible_collections/l3d/users/``.
+```
+# Clone git Repo to specified path
+git clone https://github.com/roles-ansible/ansible_collection_users.git collections/ansible_collections/l3d/users/
+
+# change directory
+cd collections/ansible_collections/l3d/users/
+
+# optionally install all requirements
+ansible-galaxy collection install -r requirements.yml --upgrade
+```
+
+You can also list a collection in ``requirements.yml``:
+```yaml
+---
+collections:
+  - name: l3d.users
+    version: ">=1.0.1"
+```
+
  Global Variables:
 -------------------
 
