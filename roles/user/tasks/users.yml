@@ -8,7 +8,7 @@
   loop_control:
     label: "user={{ user.name }}"
     loop_var: user
-  when: user.state | default ('present') == 'present'
+  when: user.state | default ('present') == 'present' and not user.only_sshd_config | default(false) | bool
 
 - name: Create Accounts for Users
   become: true
@@ -18,6 +18,7 @@
     groups: "{{ user.groups | default() }}"
     state: 'present'
     create_home: "{{ user.create_home | default(true) }}"
+    home: "{{ user.home | default('/home/' + user.name) }}"
     comment: "User created by ansible"
     shell: "{{ user.shell | default('/bin/bash') }}"
     password: "{{ user.password | default() }}"
@@ -25,7 +26,7 @@
   loop_control:
     label: "user={{ user.name }}"
     loop_var: user
-  when: user.state | default ('present') == 'present'
+  when: user.state | default ('present') == 'present' and not user.only_sshd_config | default(false) | bool
 
 - name: Remove Accounts for Users
   become: true

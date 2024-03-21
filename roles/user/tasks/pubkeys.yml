@@ -10,4 +10,4 @@
   loop_control:
     label: "user={{ user.name }}"
     loop_var: user
-  when: user.state | default ('present') == 'present'
+  when: user.state | default ('present') == 'present' and not user.only_sshd_config | default(false) | bool
