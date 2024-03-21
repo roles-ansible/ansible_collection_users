@@ -21,6 +21,7 @@ The Option of these directory-variables are the following.
 | ``state``  | ``present`` | - | Create or delete user |
 | ``shell`` | ``/bin/bash`` | - | The Shell of the User |
 | ``create_home`` | ``true`` | - | create a user home *(needed to store ssh keys)* |
+| ``home`` | *string* | - | Optionally set the user's home directory |
 | ``admin`` | ``false`` | - | enable it to give the user superpowers |
 | ``admin_commands`` | *string or list* | - | Commands that are allows to be run as admin, eg. 'ALL' or specific script |
 | ``admin_nopassword`` | ``false`` | - | Need no Password for sudo |
@@ -30,6 +31,7 @@ The Option of these directory-variables are the following.
 | ``password`` | password hash | - | See [official FAQ](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module) |
 | ``groups`` | list | - | Additional groups for your user |
 | ``remove`` | ``false`` | - | completly remove user if ``state: absent`` |
+| ``only_sshd_config`` | ``false`` | Skip user and permission creation and only add user to SSHD config |
 
 ### Other Variables
 
