@@ -8,7 +8,7 @@
   loop_control:
     label: "user={{ user.name }}"
     loop_var: user
-  when: user.state | default ('present') == 'present' and not user.only_sshd_config | default(false) | bool
+  when: user.state | default ('present') == 'present'
 
 - name: Create Accounts for Users
   become: true
@@ -26,7 +26,7 @@
   loop_control:
     label: "user={{ user.name }}"
     loop_var: user
-  when: user.state | default ('present') == 'present' and not user.only_sshd_config | default(false) | bool
+  when: user.state | default ('present') == 'present'
 
 - name: Remove Accounts for Users
   become: true

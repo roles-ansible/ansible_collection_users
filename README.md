@@ -72,7 +72,8 @@ The Option of these directory-variables are the following.
 | ``password`` | password hash | - | See [official FAQ](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module) |
 | ``groups`` | list | - | Additional groups for your user |
 | ``remove`` | ``false`` | - | completly remove user if ``state: absent`` |
-| ``only_sshd_config`` | ``false`` | Skip user and permission creation and only add user to SSHD config |
+
+There is also the ``l3d_users__ssh_login`` variable which only supports ``name`` and ``state``. It can be used to whitelist users to the sshd config.
 
 ### Other variables
 | name | default value | description |

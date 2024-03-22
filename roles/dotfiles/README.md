@@ -1,7 +1,7 @@
- Ansible Role SSHD
+ Ansible Role dotfiles
 ====================
 
-Ansible role l3d.users.sshd to Manage SSHD Configuration of the system and which Accounts are allowed to login.
+Ansible role l3d.users.dotfiles create some dotfiles dor your users.
 
 There are two variables to define users. The ``l3d_users__default_users`` is ment to put to your group_vars to define a default for your system. The ``l3d_users__local_users`` could be put in your host_vars to define host-specific user and admin roles.
 
@@ -61,7 +61,7 @@ There is a third directory-variable called ``l3d_users__ssh_login: []`` which on
 - name: Create System with User and Passwords
   hosts: example.com
   roles:
-    - {role: l3d.users.sshd, tags: 'sshd'}
+    - {role: l3d.users.dotfiles, tags: 'dotfiles'}
   vars:
     l3d_users__local_users:
       - name: 'alice'

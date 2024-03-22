@@ -1,0 +1,14 @@
+---
+- name: Perform optional versionscheck
+  ansible.builtin.include_tasks:
+    file: 'versioncheck.yml'
+  when: submodules_versioncheck | bool
+
+- name: Install dotfiles packages
+  ansible.builtin.include_tasks:
+    file: 'packages.yml'
+
+- name: Setup and configure bashrc
+  ansible.builtin.include_tasks:
+    file: 'packages.yml'
+  when: 

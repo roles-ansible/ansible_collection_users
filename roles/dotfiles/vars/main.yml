@@ -1,0 +1,9 @@
+---
+l3d_users__dotfiles_packages:
+  - bash
+  - vim
+  - htop
+  - ranger
+
+playbook_version_number: 2
+playbook_version_path: 'l3d.users.dotfiles.version'
