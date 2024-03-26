@@ -1,8 +1,15 @@
-# /etc/bashrc
+# {{ user.home | default('/home/' + user.name) }}/.bashrc"
+# for user {{ user.name }}
 {{ ansible_managed | comment }}
 
-# System wide functions and aliases
-# Environment stuff goes in /etc/profile
+# Source global definitions
+if [ -f /etc/bash.bashrc ]; then
+	. /etc/bash.bashrc
+fi
+
+# User specific environment
+PATH="{{ l3d_users__bashrc_path }}"
+export PATH
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -29,16 +36,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
-{% endif %}
-
 # fancy Prompt
-if [ $(id -u) -eq 0 ]; then
-    export PS1='{{ l3d_users__dotfiles__root_prompt }} '
-else
-    export PS1='{{ l3d_users__dotfiles__user_prompt }} '
-fi
+export PS1='{{ l3d_users__dotfiles__user_prompt }} '
 
-
+# baqsh_history
 HISTCONTROL={{ l3d_users__dotfiles__history_control }}
 shopt -s histappend
 {% if ansible_os_family == 'Redhat' %}
@@ -51,4 +52,15 @@ shopt -s histappend
 HISTSIZE={{ dotfiles__history_size }}
 HISTFILESIZE={{ dotfiles__history_file_size }}
 {% endif %}
+
+# additional general rules
+{% for _row in dotfiles__additional_user_bashrc_lines | default() %}
+{{ _row }}
+{% endfor %}
+
+# additional user rules
+{% for custom in {{ user.bashrc | default([]) }} %}
+{{ custom }}
+{% endfor %}
+
 # vim:ts=4:sw=4

@@ -70,6 +70,7 @@ The Option of these directory-variables are the following.
 | ``pubkeys`` | string or lookup | - | see examples |
 | ``exklusive_pubkeys`` | ``true`` | - | delete all undefined ssh keys |
 | ``password`` | password hash | - | See [official FAQ](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module) |
+| ``bashrc`` | list | - | adding additional content to l3d.users.dotfiles to .bashrc |
 | ``groups`` | list | - | Additional groups for your user |
 | ``remove`` | ``false`` | - | completly remove user if ``state: absent`` |
 
