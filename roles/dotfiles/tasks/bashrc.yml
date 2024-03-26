@@ -1,0 +1,9 @@
+---
+- name: Create global bashrc configuration
+  become: true
+  ansible.builtin.template:
+    src: 'templates/bash.bashrc.j2'
+    dest: '/etc/bash.bashrc'
+    owner: root
+    group: root
+    mode: 'u=rw,g=r,o=r'

@@ -28,58 +28,7 @@ l3d_users__local_users: []
 #    admin: false
 #    pubkeys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
 
-l3d_users__ssh_login: []
-# - name: 'dora'
-#   state: 'present'
-
-l3d_users__limit_login: true
-
-l3d_users__sshd_port: 22
-l3d_users__sshd_password_authentication: false
-l3d_users__sshd_permitrootlogin: false
-l3d_users__create_ansible: true
-l3d_users__ansible_user_state: 'present'
-
-l3d_users__sshd_manage_server_key_types: true
-l3d_users__sshd_server_key_types:
-  - 'ed25519'
-  # - 'rsa'
-  # - 'ecdsa'
-
-l3d_users__sshd_manage_key_algorithmus: true
-l3d_users__sshd_key_algorithmus:
-  - 'ssh-ed25519-cert-v01@openssh.com'
-  - 'ssh-ed25519'
-  - 'ecdsa-sha2-nistp521-cert-v01@openssh.com'
-  - 'ecdsa-sha2-nistp384-cert-v01@openssh.com'
-  - 'ecdsa-sha2-nistp256-cert-v01@openssh.com'
-  # - 'rsa-sha2-512-cert-v01@openssh.com'
-  # - 'rsa-sha2-256-cert-v01@openssh.com'
-  # - 'ssh-rsa-cert-v01@openssh.com'
-  # - 'ecdsa-sha2-nistp521'
-  # - 'ecdsa-sha2-nistp384'
-  # - 'ecdsa-sha2-nistp256'
-  # - 'rsa-sha2-512'
-  # - 'rsa-sha2-256'
-  # - 'ssh-rsa'
-
-l3d_users__sshd_manage_kex_algorithmus: true
-l3d_users__sshd_kex_algorithmus:
-  - 'curve25519-sha256@libssh.org'
-  - 'diffie-hellman-group-exchange-sha256'
-  - 'diffie-hellman-group-exchange-sha1'
-  # - 'diffie-hellman-group14-sha1'
-  # - 'diffie-hellman-group1-sha1'
-
-l3d_users__sshd_manage_ciphers: true
-l3d_users__sshd_ciphers:
-  - 'chacha20-poly1305@openssh.com'
-  - 'aes256-gcm@openssh.com'
-  - 'aes256-ctr'
-  # - 'aes256-cbc'
-  # - 'aes128-ctr'
-  # - 'aes128-cbc'
-
+l3d_users__bashrc: true
 
 # run simple versionscheck
 submodules_versioncheck: false

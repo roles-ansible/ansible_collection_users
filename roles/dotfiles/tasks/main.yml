@@ -10,5 +10,5 @@
 
 - name: Setup and configure bashrc
   ansible.builtin.include_tasks:
-    file: 'packages.yml'
-  when: 
+    file: 'bashrc.yml'
+  when: l3d_users__bashrc | bool
