@@ -14,7 +14,7 @@ export PATH
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-{% for alias in dotfiles__aliases %}
+{% for alias in l3d_users__dotfiles__aliases %}
 {%     if alias.color %}
     alias {{ alias.alias }}="{{ alias.command }} --color=auto"
 {%     endif %}
