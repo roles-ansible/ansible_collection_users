@@ -8,7 +8,7 @@
     group: 'root'
     mode: 'u=rw,g=r,o=r'
 
-- name: Create global bashrc configuration
+- name: Create bashrc configuration per user
   become: true
   ansible.builtin.template:
     src: 'templates/dotbashrc.j2'

@@ -8,11 +8,11 @@
     group: 'root'
     mode: 'u=rw,g=r,o=r'
 
-- name: Create global bashrc configuration
+- name: Create vimrc configuration per defined user
   become: true
   ansible.builtin.template:
-    src: 'templates/dotbashrc.j2'
-    dest: "{{ user.home | default('/home/' + user.name) }}/.bashrc"
+    src: 'templates/vimrc.j2'
+    dest: "{{ user.home | default('/home/' + user.name) }}/.vimrc"
     owner: "{{ user.name }}"
     group: "{{ user.name }}"
     mode: '0640'

@@ -4,5 +4,5 @@ l3d_users__dotfiles_packages:
   - vim
   - htop
 
-playbook_version_number: 4
+playbook_version_number: 5
 playbook_version_path: 'l3d.users.dotfiles.version'
