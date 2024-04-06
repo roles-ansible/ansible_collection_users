@@ -12,3 +12,8 @@
   ansible.builtin.include_tasks:
     file: 'bashrc.yml'
   when: l3d_users__bashrc | bool
+
+- name: Setup and configure vimrc
+  ansible.builtin.include_tasks:
+    file: 'vimrc.yml'
+  when: l3d_users__vimrc | bool

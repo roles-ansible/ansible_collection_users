@@ -4,7 +4,7 @@
 
 # Source global definitions
 if [ -f /etc/bash.bashrc ]; then
-	. /etc/bash.bashrc
+    source /etc/bash.bashrc
 fi
 
 # User specific environment
@@ -15,19 +15,19 @@ export PATH
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 {% for alias in dotfiles__aliases %}
-{% if alias.color %}
+{%     if alias.color %}
     alias {{ alias.alias }}="{{ alias.command }} --color=auto"
-{% endif%}
+{%     endif %}
 {% endfor %}
 fi
 
 {% for alias in l3d_users__dotfiles__aliases %}
-{% if not alias.color %}
+{%     if not alias.color %}
     alias {{ alias.alias }}="{{ alias.command }}"
-{% endif%}
+{%     endif %}
 {% endfor %}
 
-{%if l3d_users__dotfiles__bash_completion_enabled %}
+{% if l3d_users__dotfiles__bash_completion_enabled %}
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
@@ -35,6 +35,7 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+{% endif %}
 
 # fancy Prompt
 export PS1='{{ l3d_users__dotfiles__user_prompt }} '
@@ -59,7 +60,7 @@ HISTFILESIZE={{ dotfiles__history_file_size }}
 {% endfor %}
 
 # additional user rules
-{% for custom in {{ user.bashrc | default([]) }} %}
+{% for custom in user.bashrc | default([]) %}
 {{ custom }}
 {% endfor %}
 

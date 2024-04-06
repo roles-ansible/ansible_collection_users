@@ -41,7 +41,7 @@ l3d_users__dotfiles__aliases:
   - {alias: "lz", command: "ls -Z", color: false}
   - {alias: "EDITOR", command: "/usr/bin/vim", color: false}
   - {alias: "VISUAL", command: "/usr/bin/gedit", color: false}
-  - {alias: "gitsubpull", command: "git submodule foreach '(git checkout \\$(git symbolic-ref --short refs/remotes/origin/HEAD | sed 's@^origin/@@'); git pull)'", color: false}
+  - {alias: "gitsubpull", command: "git submodule foreach '(git checkout $(git symbolic-ref --short refs/remotes/origin/HEAD | sed 's@^origin/@@'); git pull ; git submodule foreach \"(git checkout $(git symbolic-ref --short refs/remotes/origin/HEAD | sed 's@^origin/@@'); git pull)\")'", color: false}
   - {alias: "pwgen", command: "/usr/bin/pwgen --num-passwords=3000 --numerals --capitalize --secure --no-vowels --ambiguous 95 1", color: false}
   - {alias: "gdiff", command: "git diff --submodule=diff", color: false}
 dotfiles__additional_user_bashrc_lines: []
@@ -56,6 +56,9 @@ l3d_users__dotfiles__root_prompt: '\e]0; \u@\H <\A> \w\a\[\033[01;31m\] $(printf
 l3d_users__dotfiles__history_control: 'ignoreboth'
 l3d_users__dotfiles__history_size: '-1'
 l3d_users__dotfiles__history_file_size: '-1'
+
+# vim config
+l3d_users__vimrc: true
 
 # run simple versionscheck
 submodules_versioncheck: false

@@ -1,0 +1,23 @@
+---
+- name: Create vimrc configuration for root
+  become: true
+  ansible.builtin.template:
+    src: 'templates/vimrc.j2'
+    dest: '/root/.vimrc'
+    owner: 'root'
+    group: 'root'
+    mode: 'u=rw,g=r,o=r'
+
+- name: Create global bashrc configuration
+  become: true
+  ansible.builtin.template:
+    src: 'templates/dotbashrc.j2'
+    dest: "{{ user.home | default('/home/' + user.name) }}/.bashrc"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: '0640'
+  loop: "{{ _l3d_users__merged_users }}"
+  loop_control:
+    label: "user={{ user.name }}"
+    loop_var: user
+  when: user.state | default ('present') == 'present'
