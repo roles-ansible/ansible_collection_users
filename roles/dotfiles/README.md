@@ -48,6 +48,7 @@ There is a third directory-variable called ``l3d_users__ssh_login: []`` which on
 | ``l3d_users__dotfiles__history_size`` | ``-1`` | bashrc history size |
 | ``l3d_users__dotfiles__history_file_size`` | ``-1`` | bashrc history filesize |
 | ``l3d_users__vimrc`` | ``true`` | Create vim config |
+| ``l3d_users__vim_colorscheme`` | ``elflord`` | Configure vim colorscheme |
 | ``l3d_users__tmuxcfg`` | ``true`` | Create Tmux Config |
 | ``submodules_versioncheck`` | ``false`` | Optionaly enable simple versionscheck of this role |
 

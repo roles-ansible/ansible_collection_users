@@ -15,6 +15,7 @@ And it is possible to delete users too.
 + ``l3d.users.user``: [roles/user](roles/user) ![logo](https://ansible.l3d.space/svg/l3d.users.user_ansible-role.svg)
 + ``l3d.users.admin``: [roles/admin](roles/admin) ![logo](https://ansible.l3d.space/svg/l3d.users.admin_ansible-role.svg)
 + ``l3d.users.sshd``: [roles/sshd](roles/admin) ![logo](https://ansible.l3d.space/svg/l3d.users.sshd_ansible-role.svg)
++ ``l3d.users.dotfiles``: [roles/dotfiles](roles/dotfiles) ![logo](https://ansible.l3d.space/svg/l3d.users.dotfiles_ansible-role.svg)
 
 ## Using this Collection
 You can install the collection using ansible-galaxy by running:
@@ -101,6 +102,20 @@ There is also the ``l3d_users__ssh_login`` variable which only supports ``name``
 | ``l3d_users__sshd_manage_macs`` | ``true`` | Manage Used MACs |
 | ``l3d_users__sshd_macs`` | ``['hmac-sha2-512-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'hmac-sha2-512']`` | Used MACs |
 | ``l3d_users__sshd_xforwarding`` |``true`` | Enable X-Forwarding |
+| ``l3d_users__bashrc`` | ``true`` | Configure bashrc |
+| ``l3d_users__dotfiles__bash_completion_enabled`` | ``true`` | Enable bash completion |
+| ``l3d_users__dotfiles__aliases`` | *see [defaults/main.yml](defaults/main.yml)* | A predefined list of usefull aliases for your bash config |
+| ``dotfiles__additional_user_bashrc_lines`` | ``[]`` | variable for additional bashrc lines |
+| ``l3d_users__bashrc_path`` | ``$HOME/.local/bin:$HOME/bin:$HOME/.cargo/env:$PATH``| bashrc $PATH |
+| ``l3d_users__dotfiles__user_prompt`` | *see [defaults/main.yml](defaults/main.yml)* | PS1 prompt for users |
+| ``l3d_users__dotfiles__root_prompt`` | *see [defaults/main.yml](defaults/main.yml)* | PS1 prompt for root |
+| ``l3d_users__dotfiles__history_control`` | ``ignoreboth`` | bashrc history control |
+| ``l3d_users__dotfiles__history_size`` | ``-1`` | bashrc history size |
+| ``l3d_users__dotfiles__history_file_size`` | ``-1`` | bashrc history filesize |
+| ``l3d_users__vimrc`` | ``true`` | Create vim config |
+| ``l3d_users__vim_colorscheme`` | ``elflord`` | Configure vim colorscheme |
+| ``l3d_users__tmuxcfg`` | ``true`` | Create Tmux Config |
+| ``submodules_versioncheck`` | ``false`` | Optionaly enable simple versionscheck of this role |
 | ``submodules_versioncheck`` | ``false`` | Optionaly enable simple versionscheck of this role |
 
 ## Requirements
