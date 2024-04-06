@@ -1,6 +1,6 @@
 # {{ user.home | default('/home/' + user.name) }}/.bashrc"
 # for user {{ user.name }}
-{{ ansible_managed | comment }}
+{{ ansible_managed | ansible.builtin.comment }}
 
 # Source global definitions
 if [ -f /etc/bash.bashrc ]; then
@@ -44,18 +44,18 @@ export PS1='{{ l3d_users__dotfiles__user_prompt }} '
 HISTCONTROL={{ l3d_users__dotfiles__history_control }}
 shopt -s histappend
 {% if ansible_os_family == 'Redhat' %}
-# HISTSIZE={{ dotfiles__history_size }}
-# HISTFILESIZE={{ dotfiles__history_file_size }}
+# HISTSIZE={{ l3d_users__dotfiles__history_size }}
+# HISTFILESIZE={{ l3d_users__dotfiles__history_file_size }}
 {% elif ansible_distribution == "CentOS" %}
-# HISTSIZE={{ dotfiles__history_size }}
-# HISTFILESIZE={{ dotfiles__history_file_size }}
+# HISTSIZE={{ l3d_users__dotfiles__history_size }}
+# HISTFILESIZE={{ l3d_users__dotfiles__history_file_size }}
 {% else %}
-HISTSIZE={{ dotfiles__history_size }}
-HISTFILESIZE={{ dotfiles__history_file_size }}
+HISTSIZE={{ l3d_users__dotfiles__history_size }}
+HISTFILESIZE={{ l3d_users__dotfiles__history_file_size }}
 {% endif %}
 
 # additional general rules
-{% for _row in dotfiles__additional_user_bashrc_lines | default() %}
+{% for _row in l3d_users__dotfiles__additional_user_bashrc_lines | default() %}
 {{ _row }}
 {% endfor %}
 

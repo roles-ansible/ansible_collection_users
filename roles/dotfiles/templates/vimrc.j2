@@ -1,5 +1,6 @@
-{{ ansible_managed | comment }}
-
+"
+" {{ ansible_managed }}
+"
 " gopass secure editor
 au BufNewFile,BufRead /dev/shm/gopass.* setlocal noswapfile nobackup noundofile
 
@@ -8,7 +9,7 @@ syntax on               " enable syntax highlighting
 set cursorline          " highlight the current line
 set fileencoding=utf-8
 set encoding=utf-8
-colorscheme elflord
+colorscheme {{ l3d_users__vim_colorscheme }}
 set cursorline          " highlight the current line
 
 " tabs and indenting

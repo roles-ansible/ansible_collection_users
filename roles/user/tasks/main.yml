@@ -8,7 +8,6 @@
   ansible.builtin.set_fact:
     _l3d_users__merged_users: "{{ l3d_users__default_users + l3d_users__local_users }}"
 
-
 - name: Create ansible user with superuser permissions
   ansible.builtin.include_tasks:
     file: 'user_ansible.yml'

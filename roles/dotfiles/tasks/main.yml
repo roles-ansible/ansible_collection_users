@@ -8,6 +8,10 @@
   ansible.builtin.include_tasks:
     file: 'packages.yml'
 
+- name: Merge default and locale Users
+  ansible.builtin.set_fact:
+    _l3d_users__merged_users: "{{ l3d_users__default_users + l3d_users__local_users }}"
+
 - name: Setup and configure bashrc
   ansible.builtin.include_tasks:
     file: 'bashrc.yml'
