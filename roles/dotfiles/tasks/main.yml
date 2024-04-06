@@ -17,3 +17,8 @@
   ansible.builtin.include_tasks:
     file: 'vimrc.yml'
   when: l3d_users__vimrc | bool
+
+- name: Setup and configure tmux
+  ansible.builtin.include_tasks:
+    file: 'tmux.yml'
+  when: l3d_users__tmuxcfg | bool
