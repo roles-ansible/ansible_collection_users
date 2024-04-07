@@ -1,7 +1,7 @@
- Ansible Role SSHD
+ Ansible Role dotfiles
 ====================
 
-Ansible role l3d.users.sshd to Manage SSHD Configuration of the system and which Accounts are allowed to login.
+Ansible role l3d.users.dotfiles create some dotfiles dor your users.
 
 There are two variables to define users. The ``l3d_users__default_users`` is ment to put to your group_vars to define a default for your system. The ``l3d_users__local_users`` could be put in your host_vars to define host-specific user and admin roles.
 
@@ -27,6 +27,7 @@ The Option of these directory-variables are the following.
 | ``pubkeys`` | string or lookup | - | see examples |
 | ``exklusive_pubkeys`` | ``true`` | - | delete all undefined ssh keys |
 | ``password`` | password hash | - | See [official FAQ](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module) |
+| ``bashrc`` | list | - | adding additional content to l3d.users.dotfiles to .bashrc |
 | ``groups`` | list | - | Additional groups for your user |
 | ``remove`` | ``false`` | - | completly remove user if ``state: absent`` |
 
@@ -36,23 +37,19 @@ There is a third directory-variable called ``l3d_users__ssh_login: []`` which on
 
 | name | default value | description |
 | ---  | --- | --- |
-| ``l3d_users__limit_login`` | ``true`` | Only allow SSH login for specified users |
-| ``l3d_users__sshd_port`` | ``22`` | Port for SSH |
-| ``l3d_users__sshd_password_authentication`` | ``false`` | Allow login with Password |
-| ``l3d_users__sshd_permitrootlogin`` | ``false`` | Allow login as root |
-| ``l3d_users__create_ansible`` | ``true`` | Create Ansible User |
-| ``l3d_users__ansible_user_state`` | ``present`` | Ansible User State |
-| ``l3d_users__sshd_manage_server_key_types`` | ``true`` | Manage Server SSH Key types |
-| ``l3d_users__sshd_server_key_types`` | ``['ed25519']`` | List of supported SSH Key Types |
-| ``l3d_users__sshd_manage_key_algorithmus`` | ``true`` | Manage SSH Key Algorythmins |
-| ``l3d_users__sshd_key_algorithmus`` | ``['ssh-ed25519-cert-v01@openssh.com', 'ssh-ed25519', 'ecdsa-sha2-nistp521-cert-v01@openssh.com', 'ecdsa-sha2-nistp384-cert-v01@openssh.com', 'ecdsa-sha2-nistp256-cert-v01@openssh.com']`` | Used SSH Key Algorithms |
-| ``l3d_users__sshd_manage_kex_algorithmus`` | ``true`` | Manage SSH Kex Algorythms |
-| ``l3d_users__sshd_kex_algorithmus`` | ``['curve25519-sha256@libssh.org', 'diffie-hellman-group-exchange-sha256', 'diffie-hellman-group-exchange-sha1']`` | Used Kex Algorythms |
-| ``l3d_users__sshd_manage_ciphers`` | ``true`` | Manage SSH Ciphers |
-| ``l3d_users__sshd_ciphers`` | ``['chacha20-poly1305@openssh.com', 'aes256-gcm@openssh.com', 'aes256-ctr']`` | Used SSH Ciphers |
-| ``l3d_users__sshd_manage_macs`` | ``true`` | Manage Used MACs |
-| ``l3d_users__sshd_macs`` | ``['hmac-sha2-512-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'hmac-sha2-512']`` | Used MACs |
-| ``l3d_users__sshd_xforwarding`` |``true`` | Enable X-Forwarding |
+| ``l3d_users__bashrc`` | ``true`` | Configure bashrc |
+| ``l3d_users__dotfiles__bash_completion_enabled`` | ``true`` | Enable bash completion |
+| ``l3d_users__dotfiles__aliases`` | *see [defaults/main.yml](defaults/main.yml)* | A predefined list of usefull aliases for your bash config |
+| ``dotfiles__additional_user_bashrc_lines`` | ``[]`` | variable for additional bashrc lines |
+| ``l3d_users__bashrc_path`` | ``$HOME/.local/bin:$HOME/bin:$HOME/.cargo/env:$PATH``| bashrc $PATH |
+| ``l3d_users__dotfiles__user_prompt`` | *see [defaults/main.yml](defaults/main.yml)* | PS1 prompt for users |
+| ``l3d_users__dotfiles__root_prompt`` | *see [defaults/main.yml](defaults/main.yml)* | PS1 prompt for root |
+| ``l3d_users__dotfiles__history_control`` | ``ignoreboth`` | bashrc history control |
+| ``l3d_users__dotfiles__history_size`` | ``-1`` | bashrc history size |
+| ``l3d_users__dotfiles__history_file_size`` | ``-1`` | bashrc history filesize |
+| ``l3d_users__vimrc`` | ``true`` | Create vim config |
+| ``l3d_users__vim_colorscheme`` | ``elflord`` | Configure vim colorscheme |
+| ``l3d_users__tmuxcfg`` | ``true`` | Create Tmux Config |
 | ``submodules_versioncheck`` | ``false`` | Optionaly enable simple versionscheck of this role |
 
  Example Playbook
@@ -61,7 +58,7 @@ There is a third directory-variable called ``l3d_users__ssh_login: []`` which on
 - name: Create System with User and Passwords
   hosts: example.com
   roles:
-    - {role: l3d.users.sshd, tags: 'sshd'}
+    - {role: l3d.users.dotfiles, tags: 'dotfiles'}
   vars:
     l3d_users__local_users:
       - name: 'alice'

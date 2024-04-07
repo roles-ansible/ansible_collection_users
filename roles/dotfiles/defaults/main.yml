@@ -1,0 +1,68 @@
+---
+# create users
+l3d_users__default_users: []
+#  - name: 'alice'
+#    state: 'present'
+#    shell: '/bin/bash'
+#    create_home: true
+#    pubkeys: |
+#       ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPvvXN33GwkTF4ZOwPgF21Un4R2z9hWUuQt1qIfzQyhC
+#       ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAG65EdcM+JLv0gnzT9LcqVU47Pkw0SqiIg7XipXENi8
+#       ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJz7zEvUVgJJJsIgfG3izsqYcM22IaKz4jGVUbNRL2PX
+#    exklusive_pubkeys: true
+#    password: "$Password_hash"
+#    admin: true
+#    admin_commands: 'ALL'
+#    admin_nopassword: false
+#    admin_ansible_login: true
+#    bashrc:
+#      - '[[ $- == *i* ]] && eval $(keychain --eval --quiet id_ed25519)'
+#  - name: 'bob'
+#    state: 'present'
+#    shell: '/bin/zsh'
+#    admin: false
+#    pubkeys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
+#    exklusive_pubkeys: false
+
+l3d_users__local_users: []
+#  - name: 'charlie'
+#    state: 'present'
+#    admin: false
+#    pubkeys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
+
+l3d_users__bashrc: true
+l3d_users__dotfiles__bash_completion_enabled: true
+l3d_users__dotfiles__aliases:
+  - {alias: "ls", command: "ls ", color: true}
+  - {alias: "grep", command: "grep", color: true}
+  - {alias: "ll", command: "ls -alF", color: false}
+  - {alias: "la", command: "ls -A", color: false}
+  - {alias: "l", command: "ls -CF", color: false}
+  - {alias: "lz", command: "ls -Z", color: false}
+  - {alias: "EDITOR", command: "/usr/bin/vim", color: false}
+  - {alias: "VISUAL", command: "/usr/bin/gedit", color: false}
+  - {alias: "gitsubpull", command: "git submodule foreach '(git checkout \\$(git symbolic-ref --short refs/remotes/origin/HEAD | sed 's@^origin/@@'); git pull ; git submodule foreach \\\"(git checkout \\$(git symbolic-ref --short refs/remotes/origin/HEAD | sed 's@^origin/@@'); git pull)\\\")'", color: false}
+  - {alias: "pwgen", command: "/usr/bin/pwgen --num-passwords=3000 --numerals --capitalize --secure --no-vowels --ambiguous 95 1", color: false}
+  - {alias: "gdiff", command: "git diff --submodule=diff", color: false}
+dotfiles__additional_user_bashrc_lines: []
+
+l3d_users__bashrc_path: "$HOME/.local/bin:$HOME/bin:$HOME/.cargo/env:$PATH"
+
+# PS1 Prompt
+l3d_users__dotfiles__user_prompt: '\e]0; \u@\H <\A> \w\a\[\033[01;33m\] $(printf "\xE2\x9D\xA4") \[\033[01;32m\]\u\[\033[01;36m\]@\[\033[01;32m\]\H\[\033[01;34m\] <\A> \[\033[01;35m\] \j \[\033[01;36m\] \w \[\033[01;33m\]\n\[\033[01;33m\] $(git branch 2>/dev/null | sed -n "s/* \(.*\)/\1 /p")$\[\033[01;00m\]'
+l3d_users__dotfiles__root_prompt: '\e]0; \u@\H <\A> \w\a\[\033[01;31m\] $(printf "\xE2\x9D\xA4") \[\033[01;32m\]\u\[\033[01;36m\]@\[\033[01;32m\]\H\[\033[01;34m\] <\A> \[\033[01;35m\] \j \[\033[01;36m\] \w \[\033[01;33m\]\n\[\033[01;33m\] $(git branch 2>/dev/null | sed -n "s/* \(.*\)/\1 /p")$\[\033[01;00m\]'
+
+# bash_history
+l3d_users__dotfiles__history_control: 'ignoreboth'
+l3d_users__dotfiles__history_size: '-1'
+l3d_users__dotfiles__history_file_size: '-1'
+
+# vim config
+l3d_users__vimrc: true
+l3d_users__vim_colorscheme: 'elflord'
+
+# tmux config
+l3d_users__tmuxcfg: true
+
+# run simple versionscheck
+submodules_versioncheck: false

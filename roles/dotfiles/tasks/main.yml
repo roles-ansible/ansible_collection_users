@@ -4,19 +4,25 @@
     file: 'versioncheck.yml'
   when: submodules_versioncheck | bool
 
+- name: Install dotfiles packages
+  ansible.builtin.include_tasks:
+    file: 'packages.yml'
+
 - name: Merge default and locale Users
   ansible.builtin.set_fact:
     _l3d_users__merged_users: "{{ l3d_users__default_users + l3d_users__local_users }}"
 
-- name: Create ansible user with superuser permissions
+- name: Setup and configure bashrc
   ansible.builtin.include_tasks:
-    file: 'user_ansible.yml'
-  when: l3d_users__create_ansible | bool
+    file: 'bashrc.yml'
+  when: l3d_users__bashrc | bool
 
-- name: Create Groups and Users
+- name: Setup and configure vimrc
   ansible.builtin.include_tasks:
-    file: 'users.yml'
+    file: 'vimrc.yml'
+  when: l3d_users__vimrc | bool
 
-- name: Manage SSH public keys
+- name: Setup and configure tmux
   ansible.builtin.include_tasks:
-    file: 'pubkeys.yml'
+    file: 'tmux.yml'
+  when: l3d_users__tmuxcfg | bool

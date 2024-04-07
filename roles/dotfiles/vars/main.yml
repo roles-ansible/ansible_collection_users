@@ -1,0 +1,9 @@
+---
+l3d_users__dotfiles_packages:
+  - bash
+  - vim
+  - htop
+  - tmux
+
+playbook_version_number: 8
+playbook_version_path: 'l3d.users.dotfiles.version'
