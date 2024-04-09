@@ -31,6 +31,7 @@
     user: 'ansible'
     state: "{{ l3d_users__ansible_user_state | ternary('present', 'absent') }}"
     key: "{{ user.pubkeys | default() }}"
+    exclusive: false
   loop: "{{ _l3d_users__merged_users }}"
   when: user.admin | default(false) | bool and user.admin_ansible_login | default(true) | bool
   loop_control:

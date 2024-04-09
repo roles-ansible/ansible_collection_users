@@ -9,10 +9,16 @@
   ansible.builtin.set_fact:
     _sshd_version: "{{ _sshd_version_cmd.stderr.split('_')[1].split(',')[0].split('p')[0] }}"
 
-- name: Show detected ssh version
+- name: Show detected ssh version (optional)
   ansible.builtin.debug:
     msg: "SSH Version: {{ _sshd_version }}"
     verbosity: 1
+
+- name: Show detected ssh version is > 8.0 (optional)
+  ansible.builtin.debug:
+    msg: "SSH Version: {{ _sshd_version }} is > 8.0"
+    verbosity: 1
+  when: _sshd_version | default(7.0) | float > 8.0
 
 - name: Create SSHD configuration
   become: true

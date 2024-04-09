@@ -69,7 +69,7 @@ There is a third directory-variable called ``l3d_users__ssh_login: []`` which on
       - name: 'charlie'
         state: 'present'
 
-    l3d_users__limit_login: true
-    l3d_users__create_ansible: true
-    submodules_versioncheck: true
+    l3d_users__bashrc: true
+    l3d_users__vimrc: true
+    l3d_users__tmuxcfg: true
 ```
