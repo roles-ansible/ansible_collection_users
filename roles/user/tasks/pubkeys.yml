@@ -5,7 +5,7 @@
     user: "{{ user.name }}"
     state: 'present'
     key: "{{ user.pubkeys | default() }}"
-    exclusive: true
+    exclusive: "{{ user.exklusive_pubkeys | default(true) }}"
   loop: "{{ _l3d_users__merged_users }}"
   loop_control:
     label: "user={{ user.name }}"
