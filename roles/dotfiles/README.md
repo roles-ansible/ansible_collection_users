@@ -40,7 +40,7 @@ There is a third directory-variable called ``l3d_users__ssh_login: []`` which on
 | ``l3d_users__bashrc`` | ``true`` | Configure bashrc |
 | ``l3d_users__dotfiles__bash_completion_enabled`` | ``true`` | Enable bash completion |
 | ``l3d_users__dotfiles__aliases`` | *see [defaults/main.yml](defaults/main.yml)* | A predefined list of usefull aliases for your bash config |
-| ``dotfiles__additional_user_bashrc_lines`` | ``[]`` | variable for additional bashrc lines |
+| ``l3d_users__dotfiles__additional_user_bashrc_lines`` | ``[]`` | variable for additional bashrc lines |
 | ``l3d_users__bashrc_path`` | ``$HOME/.local/bin:$HOME/bin:$HOME/.cargo/env:$PATH``| bashrc $PATH |
 | ``l3d_users__dotfiles__user_prompt`` | *see [defaults/main.yml](defaults/main.yml)* | PS1 prompt for users |
 | ``l3d_users__dotfiles__root_prompt`` | *see [defaults/main.yml](defaults/main.yml)* | PS1 prompt for root |
