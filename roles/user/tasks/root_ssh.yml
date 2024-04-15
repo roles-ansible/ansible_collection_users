@@ -19,5 +19,3 @@
   loop_control:
     label: "user={{ user.name }}"
     loop_var: user
-
-
