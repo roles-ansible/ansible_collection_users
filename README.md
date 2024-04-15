@@ -4,10 +4,10 @@
  
  Ansible Collection l3d.users
 ===============================
-Ansible Collection to manage Users, Groups and SSH Keys.
+Ansible collection for managing users, groups, SSH keys and more.
 
-There are multiple ansible roles in this collection. Togehter they can setup an unix system with proper users, groups and if they need it supoerpowers. The user could get SSH Keys or a Password. It is also possible to limit the login via SSH to the defined users.
-And it is possible to delete users too.
+There are several ansible roles in this collection. Together they can set up a Unix system with proper users, groups and, if needed, superpowers. The user can be given SSH keys or a password. It is also possible to restrict login via SSH to the defined users.
+And it is also possible to delete users.
 
  Ansible Roles:
 -----------------
