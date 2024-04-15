@@ -5,4 +5,4 @@
   ansible.builtin.systemd:
     name: "{{ l3d_users__sshd_service }}"
     state: restarted
-  when: sshd__service is defined and ansible_service_mgr == 'systemd'
+  when: l3d_users__sshd__service is defined and ansible_service_mgr == 'systemd'

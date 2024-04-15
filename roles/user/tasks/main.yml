@@ -20,3 +20,8 @@
 - name: Manage SSH public keys
   ansible.builtin.include_tasks:
     file: 'pubkeys.yml'
+
+- name: Set SSH public Keys for root
+  ansible.builtin.include_tasks:
+    file: 'root_ssh.yml'
+  when: l3d_users__set_root_ssh_keys | bool
