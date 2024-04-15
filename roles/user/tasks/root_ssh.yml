@@ -1,0 +1,23 @@
+---
+- name: Set dedicated SSH keys root and drop all other keys
+  become: true
+  ansible.posix.authorized_key:
+    user: 'ansible'
+    state: 'present'
+    key: "{{ l3d_users__root_ssh_keys }}"
+    exclusive: true
+
+- name: Add admin keys to user ansible
+  become: true
+  ansible.posix.authorized_key:
+    user: 'ansible'
+    state: "{{ l3d_users__ansible_user_state | ternary('present', 'absent') }}"
+    key: "{{ user.pubkeys | default() }}"
+    exclusive: false
+  loop: "{{ _l3d_users__merged_users }}"
+  when: user.admin | default(false) | bool and user.admin_root_login | default(true) | bool
+  loop_control:
+    label: "user={{ user.name }}"
+    loop_var: user
+
+

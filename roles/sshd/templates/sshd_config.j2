@@ -112,11 +112,21 @@ UsePAM yes
 {% endfor %}
 
 # User Authentication
-{% if l3d_users__create_ansible | bool and l3d_users__ansible_user_state == 'present' %}
+{% if l3d_users__create_ansible | bool and l3d_users__ansible_user_state == 'present' and not l3d_users__sshd_permitrootlogin | bool %}
 AllowUsers ansible {{ _sshd_accounts | join(' ') }}
 
 # Group Authentication
 AllowGroups ansible {{ _sshd_accounts | join(' ') }}
+{% elif l3d_users__create_ansible | bool and l3d_users__ansible_user_state == 'present' and l3d_users__sshd_permitrootlogin | bool %}
+AllowUsers root ansible {{ _sshd_accounts | join(' ') }}
+
+# Group Authentication
+AllowGroups root ansible {{ _sshd_accounts | join(' ') }}
+{% elif not l3d_users__create_ansible | bool and l3d_users__sshd_permitrootlogin | bool %}
+AllowUsers root {{ _sshd_accounts | join(' ') }}
+
+# Group Authentication
+AllowGroups root {{ _sshd_accounts | join(' ') }}
 {% else %}
 AllowUsers {{ _sshd_accounts | join(' ') }}
 

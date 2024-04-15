@@ -35,6 +35,8 @@ l3d_users__ansible_user_state: 'present'
 l3d_users__set_ansible_ssh_keys: false
 l3d_users__ansible_ssh_keys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
 l3d_users__ansible_user_password: ''
+l3d_users__set_root_ssh_keys: false
+l3d_users__root_ssh_keys: ''
 
 # run simple versionscheck
 submodules_versioncheck: false

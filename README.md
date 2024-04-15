@@ -68,6 +68,7 @@ The Option of these directory-variables are the following.
 | ``admin_commands`` | *string or list* | - | Commands that are allows to be run as admin, eg. 'ALL' or specific script |
 | ``admin_nopassword`` | ``false`` | - | Need no Password for sudo |
 | ``admin_ansible_login`` | ``true`` | - | if ``admin: true`` and ``l3d_users__create_ansible: true`` your ssh keys will be added to ansible user |
+| ``admin_root_login`` | ``true`` | - | if ``admin: true`` and ``l3d_users__set_root_ssh_keys: true`` your ssh keys will be added to root |
 | ``pubkeys`` | string or lookup | - | see examples |
 | ``exklusive_pubkeys`` | ``true`` | - | delete all undefined ssh keys |
 | ``password`` | password hash | - | See [official FAQ](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module) |
@@ -83,7 +84,9 @@ There is also the ``l3d_users__ssh_login`` variable which only supports ``name``
 | ``l3d_users__create_ansible`` | ``true`` | Create User ansible |
 | ``l3d_users__ansible_user_state`` | ``present`` | Create or delete user ansible |
 | ``l3d_users__set_ansible_ssh_keys`` | ``false`` | Set SSH Keys for User ansible |
-| ``l3d_users__ansible_ssh_keys`` | | SSH public Keys. One per line or as lookup |
+| ``l3d_users__ansible_ssh_keys`` | *see [roles/user/defaults/main.yml](roles/user/defaults/main.yml)* | SSH public Keys for ansible user. One per line or as lookup |
+| ``l3d_users__set_root_ssh_keys`` | ``false`` | Set SSH Keys for root User |
+| ``l3d_users__root_ssh_keys`` | | Additional SSH Keys for root User |
 | ``l3d_users__ansible_user_password`` | | Set optional Password for Ansible User, see [official FAQ](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module) |
 | ``l3d_users__ansible_user_command`` | ``ALL`` | Commans with superpower for ansible user |
 | ``l3d_users__ansible_user_nopassword`` | ``true`` | Allow superpowers without password for ansible user |
