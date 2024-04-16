@@ -13,6 +13,7 @@
     shell: '/bin/bash'
     group: 'ansible'
     state: "{{ l3d_users__ansible_user_state | ternary('present', 'absent') }}"
+    system: true
     password: "{{ l3d_users__ansible_user_password }}"
     create_home: true
 

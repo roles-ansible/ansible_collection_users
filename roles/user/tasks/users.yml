@@ -19,7 +19,7 @@
     state: 'present'
     create_home: "{{ user.create_home | default(true) }}"
     home: "{{ user.home | default('/home/' + user.name) }}"
-    comment: "User created by ansible"
+    comment: "{{ user.name }}"
     shell: "{{ user.shell | default('/bin/bash') }}"
     password: "{{ user.password | default() }}"
   loop: "{{ _l3d_users__merged_users }}"
