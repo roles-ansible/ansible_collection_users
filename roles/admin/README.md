@@ -3,8 +3,6 @@
 
 Ansible role l3d.users.admin to manage Admin-Permissions of Users.
 
-# WORK IN PROGRESS
-
 There are two variables to define users. The ``l3d_users__default_users`` is ment to put to your group_vars to define a default for your system. The ``l3d_users__local_users`` could be put in your host_vars to define host-specific user and admin roles.
 
  Variables:
