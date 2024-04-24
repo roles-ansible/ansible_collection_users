@@ -18,6 +18,7 @@ The Option of these directory-variables are the following.
 | option | values | required | description |
 | ------ | ------ | --- | --- |
 | ``name``   | *string* | ``required`` | The user you want to create |
+| ``comment``  | *Full Name* | - | Optionally add Full Name |
 | ``state``  | ``present`` | - | Create or delete user |
 | ``shell`` | ``/bin/bash`` | - | The Shell of the User |
 | ``create_home`` | ``true`` | - | create a user home *(needed to store ssh keys)* |
