@@ -9,7 +9,7 @@ l3d_users__default_users: []
 #       ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPvvXN33GwkTF4ZOwPgF21Un4R2z9hWUuQt1qIfzQyhC
 #       ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAG65EdcM+JLv0gnzT9LcqVU47Pkw0SqiIg7XipXENi8
 #       ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJz7zEvUVgJJJsIgfG3izsqYcM22IaKz4jGVUbNRL2PX
-#    exklusive_pubkeys: true
+#    exclusive_pubkeys: true
 #    password: "$Password_hash"
 #    admin: true
 #    admin_commands: 'ALL'
@@ -20,7 +20,7 @@ l3d_users__default_users: []
 #    shell: '/bin/zsh'
 #    admin: false
 #    pubkeys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
-#    exklusive_pubkeys: false
+#    exclusive_pubkeys: false
 
 l3d_users__local_users: []
 #  - name: 'charlie'

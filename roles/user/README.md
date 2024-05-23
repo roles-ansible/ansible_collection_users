@@ -29,7 +29,7 @@ The Option of these directory-variables are the following.
 | ``admin_ansible_login`` | ``true`` | - | if ``admin: true`` and ``l3d_users__create_ansible: true`` your ssh keys will be added to ansible user |
 | ``admin_root_login`` | ``true`` | - | if ``admin: true`` and ``l3d_users__set_root_ssh_keys: true`` your ssh keys will be added to root |
 | ``pubkeys`` | string or lookup | - | see examples |
-| ``exklusive_pubkeys`` | ``true`` | - | delete all undefined ssh keys |
+| ``exclusive_pubkeys`` | ``true`` | - | delete all undefined ssh keys |
 | ``password`` | password hash | - | See [official FAQ](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module) |
 | ``groups`` | list | - | Additional groups for your user |
 | ``remove`` | ``false`` | - | completly remove user if ``state: absent`` |
@@ -65,7 +65,7 @@ The Option of these directory-variables are the following.
           ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPvvXN33GwkTF4ZOwPgF21Un4R2z9hWUuQt1qIfzQyhC
           ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAG65EdcM+JLv0gnzT9LcqVU47Pkw0SqiIg7XipXENi8
           ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJz7zEvUVgJJJsIgfG3izsqYcM22IaKz4jGVUbNRL2PX
-        exklusive_pubkeys: true
+        exclusive_pubkeys: true
       - name: 'bob'
         state: 'present'
         admin: false

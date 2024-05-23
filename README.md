@@ -1,7 +1,7 @@
 [![collection l3d.git](https://ansible.l3d.space/svg/l3d.users_ansible-collection_collection.svg)](https://galaxy.ansible.com/ui/repo/published/l3d/users/)
 [![Maintainance](https://ansible.l3d.space/svg/l3d.users_maintainance_collection.svg)](https://ansible.l3d.space/#l3d.users)
 [![License](https://ansible.l3d.space/svg/l3d.users_license_collection.svg)](LICENSE)
- 
+
  Ansible Collection l3d.users
 ===============================
 Ansible collection for managing users, groups, SSH keys and more.
@@ -71,7 +71,7 @@ The Option of these directory-variables are the following.
 | ``admin_ansible_login`` | ``true`` | - | if ``admin: true`` and ``l3d_users__create_ansible: true`` your ssh keys will be added to ansible user |
 | ``admin_root_login`` | ``true`` | - | if ``admin: true`` and ``l3d_users__set_root_ssh_keys: true`` your ssh keys will be added to root |
 | ``pubkeys`` | string or lookup | - | see examples |
-| ``exklusive_pubkeys`` | ``true`` | - | delete all undefined ssh keys |
+| ``exclusive_pubkeys`` | ``true`` | - | delete all undefined ssh keys |
 | ``password`` | password hash | - | See [official FAQ](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module) |
 | ``bashrc`` | list | - | adding additional content to l3d.users.dotfiles to .bashrc |
 | ``groups`` | list | - | Additional groups for your user |

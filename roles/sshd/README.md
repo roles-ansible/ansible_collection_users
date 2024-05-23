@@ -25,7 +25,7 @@ The Option of these directory-variables are the following.
 | ``admin_nopassword`` | ``false`` | - | Need no Password for sudo |
 | ``admin_ansible_login`` | ``true`` | - |if ``admin: true`` and ``l3d_users__create_ansible: true`` your ssh keys will be added to ansible user |
 | ``pubkeys`` | string or lookup | - | see examples |
-| ``exklusive_pubkeys`` | ``true`` | - | delete all undefined ssh keys |
+| ``exclusive_pubkeys`` | ``true`` | - | delete all undefined ssh keys |
 | ``password`` | password hash | - | See [official FAQ](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module) |
 | ``groups`` | list | - | Additional groups for your user |
 | ``remove`` | ``false`` | - | completly remove user if ``state: absent`` |
