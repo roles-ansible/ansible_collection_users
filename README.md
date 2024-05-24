@@ -107,8 +107,10 @@ There is also the ``l3d_users__ssh_login`` variable which only supports ``name``
 | ``l3d_users__sshd_macs`` | ``['hmac-sha2-512-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'hmac-sha2-512']`` | Used MACs |
 | ``l3d_users__sshd_xforwarding`` |``true`` | Enable X-Forwarding |
 | ``l3d_users__bashrc`` | ``true`` | Configure bashrc |
+| ``l3d_users__root_bashrc`` | ``true`` | Set bashrc for root |
 | ``l3d_users__dotfiles__bash_completion_enabled`` | ``true`` | Enable bash completion |
 | ``l3d_users__dotfiles__aliases`` | *see [roles/dotfiles/defaults/main.yml](roles/dotfiles/defaults/main.yml)* | A predefined list of usefull aliases for your bash config |
+| ``l3d_users__dotfiles__variables`` | *see [defaults/main.yml](defaults/main.yml)* | A predefined list of usefull variables for your bash config |
 | ``l3d_users__dotfiles__additional_user_bashrc_lines`` | ``[]`` | variable for additional bashrc lines |
 | ``l3d_users__bashrc_path`` | ``$HOME/.local/bin:$HOME/bin:$HOME/.cargo/env:$PATH``| bashrc $PATH |
 | ``l3d_users__dotfiles__user_prompt`` | *see [roles/dotfiles/defaults/main.yml](roles/dotfiles/defaults/main.yml)* | PS1 prompt for users |

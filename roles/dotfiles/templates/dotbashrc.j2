@@ -1,5 +1,9 @@
+{% if user is defined %}
 # {{ user.home | default('/home/' + user.name) }}/.bashrc"
 # for user {{ user.name }}
+{% else %}
+# /root/.bashrc
+{% endif %}
 {{ ansible_managed | ansible.builtin.comment }}
 
 # Source global definitions
@@ -40,7 +44,7 @@ fi
 # fancy Prompt
 export PS1='{{ l3d_users__dotfiles__user_prompt }} '
 
-# baqsh_history
+# bash_history
 HISTCONTROL={{ l3d_users__dotfiles__history_control }}
 shopt -s histappend
 {% if ansible_os_family == 'Redhat' %}
@@ -59,9 +63,11 @@ HISTFILESIZE={{ l3d_users__dotfiles__history_file_size }}
 {{ _row }}
 {% endfor %}
 
+{% if user is defined %}
 # additional user rules
-{% for custom in user.bashrc | default([]) %}
-{{ custom }}
-{% endfor %}
+{%     for custom in user.bashrc | default([]) %}
+{{         custom }}
+{%     endfor %}
+{% endif %}
 
 # vim:ts=4:sw=4

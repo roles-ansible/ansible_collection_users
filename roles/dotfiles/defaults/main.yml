@@ -31,6 +31,7 @@ l3d_users__local_users: []
 #    pubkeys: "{{ lookup('url', 'https://github.com/do1jlr.keys', split_lines=False) }}"
 
 l3d_users__bashrc: true
+l3d_users__root_bashrc: true
 l3d_users__dotfiles__bash_completion_enabled: true
 l3d_users__dotfiles__aliases:
   - {alias: "ls", command: "ls ", color: true}
@@ -39,12 +40,14 @@ l3d_users__dotfiles__aliases:
   - {alias: "la", command: "ls -A", color: false}
   - {alias: "l", command: "ls -CF", color: false}
   - {alias: "lz", command: "ls -Z", color: false}
-  - {alias: "EDITOR", command: "/usr/bin/vim", color: false}
-  - {alias: "VISUAL", command: "/usr/bin/gedit", color: false}
   - {alias: "gitsubpull", command: "git submodule foreach '(git checkout \\$(git symbolic-ref --short refs/remotes/origin/HEAD | sed 's@^origin/@@'); git pull ; git submodule foreach \\\"(git checkout \\$(git symbolic-ref --short refs/remotes/origin/HEAD | sed 's@^origin/@@'); git pull)\\\")'", color: false}
   - {alias: "pwgen", command: "/usr/bin/pwgen --num-passwords=3000 --numerals --capitalize --secure --no-vowels --ambiguous 95 1", color: false}
   - {alias: "gdiff", command: "git diff --submodule=diff", color: false}
   - {alias: "ip", command: "ip ", color: true}
+
+l3d_users__dotfiles__variables:
+  - {var: "EDITOR", command: "/usr/bin/vim"}
+  - {var: "VISUAL", command: "/usr/bin/gedit"}
 
 l3d_users__dotfiles__additional_user_bashrc_lines: []
 
