@@ -20,6 +20,11 @@ fi
 {%     endif %}
 {% endfor %}
 
+# set variables
+{% for vars in l3d_users__dotfiles__variables %}
+export {{ vars.var }}="{{ vars.command }}"
+{% endfor %}
+
 {% if l3d_users__dotfiles__bash_completion_enabled %}
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then

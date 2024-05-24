@@ -5,5 +5,5 @@ l3d_users__dotfiles_packages:
   - htop
   - tmux
 
-playbook_version_number: 9
+playbook_version_number: 10
 playbook_version_path: 'l3d.users.dotfiles.version'
