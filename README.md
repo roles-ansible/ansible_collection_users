@@ -14,7 +14,7 @@ And it is also possible to delete users.
 *Please note, it is pretty useless to add an ssh key to an non-existing user directory. So please add users first before running other roles*
 + ``l3d.users.user``: [roles/user](roles/user) ![logo](https://ansible.l3d.space/svg/l3d.users.user_ansible-role.svg)
 + ``l3d.users.admin``: [roles/admin](roles/admin) ![logo](https://ansible.l3d.space/svg/l3d.users.admin_ansible-role.svg)
-+ ``l3d.users.sshd``: [roles/sshd](roles/admin) ![logo](https://ansible.l3d.space/svg/l3d.users.sshd_ansible-role.svg)
++ ``l3d.users.sshd``: [roles/sshd](roles/sshd) ![logo](https://ansible.l3d.space/svg/l3d.users.sshd_ansible-role.svg)
 + ``l3d.users.dotfiles``: [roles/dotfiles](roles/dotfiles) ![logo](https://ansible.l3d.space/svg/l3d.users.dotfiles_ansible-role.svg)
 
 ## Using this Collection
