@@ -106,6 +106,7 @@ There is also the ``l3d_users__ssh_login`` variable which only supports ``name``
 | ``l3d_users__sshd_manage_macs`` | ``true`` | Manage Used MACs |
 | ``l3d_users__sshd_macs`` | ``['hmac-sha2-512-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'hmac-sha2-512']`` | Used MACs |
 | ``l3d_users__sshd_xforwarding`` |``true`` | Enable X-Forwarding |
+| ``l3d_users__server_key_mode`` | ``0600`` | Mode of SSHD Server keys in Filesystem |
 | ``l3d_users__bashrc`` | ``true`` | Configure bashrc |
 | ``l3d_users__root_bashrc`` | ``true`` | Set bashrc for root |
 | ``l3d_users__dotfiles__bash_completion_enabled`` | ``true`` | Enable bash completion |
