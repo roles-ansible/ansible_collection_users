@@ -53,6 +53,7 @@ There is a third directory-variable called ``l3d_users__ssh_login: []`` which on
 | ``l3d_users__sshd_manage_macs`` | ``true`` | Manage Used MACs |
 | ``l3d_users__sshd_macs`` | ``['hmac-sha2-512-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'hmac-sha2-512']`` | Used MACs |
 | ``l3d_users__sshd_xforwarding`` |``true`` | Enable X-Forwarding |
+| ``l3d_users__server_key_mode`` | ``0600`` | Mode of server keys in Filesystem |
 | ``submodules_versioncheck`` | ``false`` | Optionaly enable simple versionscheck of this role |
 
  Example Playbook
