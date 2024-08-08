@@ -3,6 +3,6 @@
   become: true
   listen: 'systemctl restart sshd'
   ansible.builtin.systemd:
-    name: "{{ l3d_users__sshd_service }}"
+    name: "{{ l3d_users__sshd_service | default(sshd) }}"
     state: restarted
-  when: l3d_users__sshd__service is defined and ansible_service_mgr == 'systemd'
+  when: nsible_service_mgr == 'systemd'

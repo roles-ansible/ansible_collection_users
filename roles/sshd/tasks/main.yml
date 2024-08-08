@@ -5,7 +5,8 @@
   when: submodules_versioncheck | bool
 
 - name: Load l3d_users_sshd_service variable
-  ansible.builtin.include_vars: "{{ lookup('first_found', l3d_users_sshd__service_var_path) }}"
+  ansible.builtin.include_vars:
+    file: "{{ lookup('first_found', l3d_users_sshd__service_var_path) }}"
 
 - name: Install openssh server
   ansible.builtin.include_tasks:
