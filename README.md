@@ -92,6 +92,7 @@ There is also the ``l3d_users__ssh_login`` variable which only supports ``name``
 | ``l3d_users__ansible_user_command`` | ``ALL`` | Commans with superpower for ansible user |
 | ``l3d_users__ansible_user_nopassword`` | ``true`` | Allow superpowers without password for ansible user |
 | ``l3d_users__limit_login`` | ``true`` | Only allow SSH login for specified users |
+| ``l3d_users__additional_groups`` | ``[]`` | Optionally create some groups |
 | ``l3d_users__sshd_port`` | ``22`` | Port for SSH |
 | ``l3d_users__sshd_password_authentication`` | ``false`` | Allow login with Password |
 | ``l3d_users__sshd_permitrootlogin`` | ``false`` | Allow login as root |

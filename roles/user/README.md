@@ -46,6 +46,7 @@ The Option of these directory-variables are the following.
 | ``l3d_users__set_root_ssh_keys`` | ``false`` | Set SSH Keys for root User |
 | ``l3d_users__root_ssh_keys`` |  | Additional SSH Keys for root User |
 | ``submodules_versioncheck`` | ``false`` | Optionaly enable simple versionscheck of this role |
+| ``l3d_users__additional_groups`` | ``[]`` | Optionally create some groups |
 
  Example Playbook
 -----------------
