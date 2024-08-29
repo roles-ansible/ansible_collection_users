@@ -1,0 +1,47 @@
+---
+- name: Create root terminator config dir
+  become: true
+  ansible.builtin.file:
+    path: '/root/.config/terminator'
+    state: 'directory'
+    mode: '0750'
+    owner: 'root'
+    group: 'root'
+
+- name: Create terminator config
+  become: true
+  ansible.builtin.template:
+    src: 'templates/terminator.conf.j2'
+    dest: '/root/.config/terminator/config'
+    owner: 'root'
+    group: 'root'
+    mode: 'u=rw,g=r,o=r'
+
+- name: Create config directory for terminator
+  become: true
+  ansible.builtin.file:
+    path: "{{ user.home | default('/home/' + user.name) }}/.config/terminator"
+    state: 'directory'
+    mode: '0750'
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+  loop: "{{ _l3d_users__merged_users }}"
+  loop_control:
+    label: "user={{ user.name }}"
+    loop_var: user
+  when: user.state | default ('present') == 'present'
+
+
+- name: Create terminator configuration per defined user
+  become: true
+  ansible.builtin.template:
+    src: 'templates/terminator.conf.j2'
+    dest: "{{ user.home | default('/home/' + user.name) }}/.config/terminator/config"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: '0640'
+  loop: "{{ _l3d_users__merged_users }}"
+  loop_control:
+    label: "user={{ user.name }}"
+    loop_var: user
+  when: user.state | default ('present') == 'present'

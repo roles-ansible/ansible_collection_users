@@ -26,3 +26,8 @@
   ansible.builtin.include_tasks:
     file: 'tmux.yml'
   when: l3d_users__tmuxcfg | bool
+
+- name: Setup and Configure terminator
+  ansible.builtin.include_tasks:
+    file: 'terminator.yml'
+  when: l3d_users__terminator | bool

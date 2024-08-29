@@ -4,6 +4,7 @@ l3d_users__dotfiles_packages:
   - vim
   - htop
   - tmux
+  - terminator
 
-playbook_version_number: 10
+playbook_version_number: 11
 playbook_version_path: 'l3d.users.dotfiles.version'

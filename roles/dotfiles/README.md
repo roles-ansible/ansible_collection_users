@@ -52,6 +52,7 @@ There is a third directory-variable called ``l3d_users__ssh_login: []`` which on
 | ``l3d_users__vimrc`` | ``true`` | Create vim config |
 | ``l3d_users__vim_colorscheme`` | ``elflord`` | Configure vim colorscheme |
 | ``l3d_users__tmuxcfg`` | ``true`` | Create Tmux Config |
+| ``l3d_users__terminator`` | ``true`` | Create terminator config |
 | ``submodules_versioncheck`` | ``false`` | Optionaly enable simple versionscheck of this role |
 
  Example Playbook
