@@ -69,5 +69,8 @@ l3d_users__vim_colorscheme: 'elflord'
 # tmux config
 l3d_users__tmuxcfg: true
 
+# terminator config
+l3d_users__terminator: true
+
 # run simple versionscheck
 submodules_versioncheck: false

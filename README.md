@@ -123,7 +123,7 @@ There is also the ``l3d_users__ssh_login`` variable which only supports ``name``
 | ``l3d_users__vimrc`` | ``true`` | Create vim config |
 | ``l3d_users__vim_colorscheme`` | ``elflord`` | Configure vim colorscheme |
 | ``l3d_users__tmuxcfg`` | ``true`` | Create Tmux Config |
-| ``submodules_versioncheck`` | ``false`` | Optionaly enable simple versionscheck of this role |
+| ``l3d_users__terminator`` | ``true`` | Create terminator config |
 | ``submodules_versioncheck`` | ``false`` | Optionaly enable simple versionscheck of this role |
 
 ## Requirements
