@@ -9,7 +9,7 @@ namespace: l3d
 name: users
 
 # The version of the collection. Must be compatible with semantic versioning
-version: 1.1.7
+version: 1.1.8
 
 # The path to the Markdown (.md) readme file. This path is relative to the root of the collection
 readme: README.md
@@ -43,9 +43,9 @@ tags:
 # L(specifiers,https://python-semanticversion.readthedocs.io/en/latest/#requirement-specification). Multiple version
 # range specifiers can be set and are separated by ','
 dependencies:
-  "community.general": ">=8.3.0"
+  "community.general": ">=9.4.0"
   "ansible.posix": ">=1.5.4"
-  "community.crypto": ">=2.17.1"
+  "community.crypto": ">=2.22.0"
 
 # The URL of the originating SCM repository
 repository: https://github.com/roles-ansible/ansible_collection_users.git

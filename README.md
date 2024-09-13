@@ -20,7 +20,7 @@ And it is also possible to delete users.
 ## Using this Collection
 You can install the collection using ansible-galaxy by running:
 ```bash
-ansible-galaxy collection install l3d.users:1.1.7
+ansible-galaxy collection install l3d.users:1.1.8
 ```
 
 Remember you can to Upgrade to the latest version of the l3d.git collection using the ``--upgrade`` parameter:
@@ -45,7 +45,7 @@ You can also list a collection in ``requirements.yml``:
 ---
 collections:
   - name: l3d.users
-    version: ">=1.1.7"
+    version: ">=1.1.8"
 ```
 
  Global Variables:
@@ -125,10 +125,3 @@ There is also the ``l3d_users__ssh_login`` variable which only supports ``name``
 | ``l3d_users__tmuxcfg`` | ``true`` | Create Tmux Config |
 | ``l3d_users__terminator`` | ``true`` | Create terminator config |
 | ``submodules_versioncheck`` | ``false`` | Optionaly enable simple versionscheck of this role |
-
-## Requirements
-+ See ``requirements.yml``
-+ Installation:
-```bash
-ansible-galaxy collection install --requirements-file requirements.yml --upgrade
-```
