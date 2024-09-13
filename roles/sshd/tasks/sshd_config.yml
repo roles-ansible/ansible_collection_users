@@ -8,6 +8,12 @@
 - name: Strip sshd output to Version
   ansible.builtin.set_fact:
     _sshd_version: "{{ _sshd_version_cmd.stderr.split('_')[1].split(',')[0].split('p')[0] }}"
+  when: not ansible_check_mode
+
+- name: Fake stripping sshd output to Version
+  ansible.builtin.set_fact:
+    _sshd_version: '7.0'
+  when: not ansible_check_mode
 
 - name: Show detected ssh version (optional)
   ansible.builtin.debug:
