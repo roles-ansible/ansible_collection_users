@@ -94,5 +94,7 @@ l3d_users__sshd_xforwarding: true
 
 l3d_users__server_key_mode: '0600'
 
+l3d_users__sshd_userrules: []
+
 # run simple versionscheck
 submodules_versioncheck: false
