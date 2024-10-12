@@ -144,3 +144,10 @@ Subsystem sftp /usr/libexec/openssh/sftp-server
 {% else %}
 Subsystem sftp /usr/lib/openssh/sftp-server
 {% endif %}
+
+{% for userrule in l3d_users__sshd_userrules %}
+Match User {{ userrule.name }}
+{%     for rule in userrule.rules | default([]) %}
+{{ rule }}
+{%     endfor %}
+{% endfor %}
