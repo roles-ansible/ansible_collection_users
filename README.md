@@ -91,7 +91,7 @@ There is also the ``l3d_users__ssh_login`` variable which only supports ``name``
 | ``l3d_users__root_ssh_keys`` | | Additional SSH Keys for root User |
 | ``l3d_users__ansible_user_password`` | | Set optional Password for Ansible User, see [official FAQ](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module) |
 | ``l3d_users__ansible_user_command`` | ``ALL`` | Commans with superpower for ansible user |
-  ``l3d_users__ansible_user_runas`` | ``ALL`` | Users that ansible can run as (needed for become_user in tasks)
+|  ``l3d_users__ansible_user_runas`` | ``ALL`` | Users that ansible can run as (needed for become_user in tasks) |
 | ``l3d_users__ansible_user_nopassword`` | ``true`` | Allow superpowers without password for ansible user |
 | ``l3d_users__limit_login`` | ``true`` | Only allow SSH login for specified users |
 | ``l3d_users__additional_groups`` | ``[]`` | Optionally create some groups |

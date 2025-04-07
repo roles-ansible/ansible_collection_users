@@ -38,7 +38,7 @@ The Option of these directory-variables are the following.
 | ``l3d_users__create_ansible`` | ``true`` | Create an Ansible User |
 | ``l3d_users__ansible_user_state`` | ``present`` | Ansible user state |
 | ``l3d_users__ansible_user_command`` | ``ALL`` | Commans with superpower for ansible user |
-  ``l3d_users__ansible_user_runas`` | ``ALL`` | Users that ansible can run as (needed for become_user in tasks) |
+|  ``l3d_users__ansible_user_runas`` | ``ALL`` | Users that ansible can run as (needed for become_user in tasks) |
 | ``l3d_users__ansible_user_nopassword`` | ``true`` | Allow superpowers without password for ansible user |
 | ``submodules_versioncheck`` | ``false`` | Optionaly enable simple versionscheck of this role |
 
