@@ -13,6 +13,7 @@ l3d_users__default_users: []
 #    password: "$Password_hash"
 #    admin: true
 #    admin_commands: 'ALL'
+#    admin_runas: 'ALL'
 #    admin_nopassword: false
 #    admin_ansible_login: true
 #    groups: ['admin', 'foo', 'bar']

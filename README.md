@@ -67,6 +67,7 @@ The Option of these directory-variables are the following.
 | ``home`` | *string* | - | Optionally set the user's home directory |
 | ``admin`` | ``false`` | - | enable it to give the user superpowers |
 | ``admin_commands`` | *string or list* | - | Commands that are allows to be run as admin, eg. 'ALL' or specific script |
+| ``admin_runas`` | *string* | Users that this user can run as (allows sudo -u <user> by this user). "ALL", or ``comma separated list as a string``. Default `null` (omitted) user may only sudo as implied user `root` |
 | ``admin_nopassword`` | ``false`` | - | Need no Password for sudo |
 | ``admin_ansible_login`` | ``true`` | - | if ``admin: true`` and ``l3d_users__create_ansible: true`` your ssh keys will be added to ansible user |
 | ``admin_root_login`` | ``true`` | - | if ``admin: true`` and ``l3d_users__set_root_ssh_keys: true`` your ssh keys will be added to root |
@@ -90,6 +91,7 @@ There is also the ``l3d_users__ssh_login`` variable which only supports ``name``
 | ``l3d_users__root_ssh_keys`` | | Additional SSH Keys for root User |
 | ``l3d_users__ansible_user_password`` | | Set optional Password for Ansible User, see [official FAQ](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module) |
 | ``l3d_users__ansible_user_command`` | ``ALL`` | Commans with superpower for ansible user |
+  ``l3d_users__ansible_user_runas`` | ``ALL`` | Users that ansible can run as (needed for become_user in tasks)
 | ``l3d_users__ansible_user_nopassword`` | ``true`` | Allow superpowers without password for ansible user |
 | ``l3d_users__limit_login`` | ``true`` | Only allow SSH login for specified users |
 | ``l3d_users__additional_groups`` | ``[]`` | Optionally create some groups |

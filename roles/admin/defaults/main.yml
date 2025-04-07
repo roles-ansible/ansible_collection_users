@@ -13,6 +13,7 @@ l3d_users__default_users: []
 #    password: "$Password_hash"
 #    admin: true
 #    admin_commands: 'ALL'
+#    admin_runas: 'ALL'
 #    admin_nopassword: false
 #    admin_ansible_login: true
 #  - name: 'bob'
@@ -31,6 +32,7 @@ l3d_users__local_users: []
 l3d_users__create_ansible: true
 l3d_users__ansible_user_state: 'present'
 l3d_users__ansible_user_command: 'ALL'
+l3d_users__ansible_user_runas: 'ALL'
 l3d_users__ansible_user_nopassword: true
 
 # run simple versionscheck
