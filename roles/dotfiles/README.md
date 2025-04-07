@@ -22,7 +22,7 @@ The Option of these directory-variables are the following.
 | ``create_home`` | ``true`` | - | create a user home *(needed to store ssh keys)* |
 | ``admin`` | ``false`` | - | enable it to give the user superpowers |
 | ``admin_commands`` | *string or list* | - | Commands that are allows to be run as admin, eg. 'ALL' or specific script |
-| ``admin_runas`` | *string* | Users that this user can run as (allows sudo -u <user> by this user). "ALL", or ``comma separated list as a string``. Default `null` (omitted) user may only sudo as implied user `root` |
+| ``admin_runas`` | *string* | - | Users that this user can run as (allows sudo -u <user> by this user). "ALL", or ``comma separated list as a string``. Default `null` (omitted user may only sudo as implied user `root`) |
 | ``admin_nopassword`` | ``false`` | - | Need no Password for sudo |
 | ``admin_ansible_login`` | ``true`` | - |if ``admin: true`` and ``l3d_users__create_ansible: true`` your ssh keys will be added to ansible user |
 | ``pubkeys`` | string or lookup | - | see examples |
