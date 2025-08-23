@@ -2,7 +2,7 @@
 - name: Set dedicated SSH keys root and drop all other keys
   become: true
   ansible.posix.authorized_key:
-    user: 'ansible'
+    user: 'root'
     state: 'present'
     key: "{{ l3d_users__root_ssh_keys }}"
     exclusive: true
