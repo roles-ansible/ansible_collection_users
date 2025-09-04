@@ -6,5 +6,6 @@
     commands: "{{ l3d_users__ansible_user_command }}"
     nopassword: "{{ l3d_users__ansible_user_nopassword | bool }}"
     user: 'ansible'
+    runas: "{{ l3d_users__ansible_user_runas | default('ALL')}}"
     state: "{{ l3d_users__ansible_user_state | ternary('present', 'absent') }}"
     validation: 'required'
