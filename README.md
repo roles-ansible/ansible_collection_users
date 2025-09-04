@@ -92,7 +92,7 @@ There is also the ``l3d_users__ssh_login`` variable which only supports ``name``
 | ``l3d_users__ansible_user_command`` | ``ALL`` | Commans with superpower for ansible user |
 | ``l3d_users__ansible_user_nopassword`` | ``true`` | Allow superpowers without password for ansible user |
 | ``l3d_users__limit_login`` | ``true`` | Only allow SSH login for specified users |
-| ``l3d_users__additional_groups`` | ``[]`` | Optionally create some groups |
+| ``l3d_users__additional_groups`` | ``[]`` | Optionally create additional groups before creating users. May be a list of strings (which will create non-system groups with the next available gid) or objects with the fields ``{name: str (required), system: bool, gid: int, state: bool}`` or some combination. String list items will be treated as the object ``{name: item}``. All omited object fields will use the `ansible.builtin.group` default values ``{gid: omit, system: false, state: present}``. |
 | ``l3d_users__sshd_port`` | ``22`` | Port for SSH |
 | ``l3d_users__sshd_password_authentication`` | ``false`` | Allow login with Password |
 | ``l3d_users__sshd_permitrootlogin`` | ``false`` | Allow login as root |
