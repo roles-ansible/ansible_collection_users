@@ -7,7 +7,7 @@
     group: root
     mode: '0600'
     owner: 'root'
-  with_items: "{{ l3d_users__sshd_server_key_types }}"
+  loop: "{{ l3d_users__sshd_server_key_types }}"
   when:
     - l3d_users__sshd_manage_server_key_types | bool
   notify:
@@ -18,8 +18,19 @@
     path: '/etc/ssh/ssh_host_{{ item }}_key'
     state: absent
   become: true
-  with_items:
+  loop:
     - "{{ l3d_users__sshd_key_types_list | difference(l3d_users__sshd_server_key_types) }}"
+  notify:
+    - 'systemctl restart sshd'
+
+- name: Make sure public key permission is set correct
+  become: true
+  ansible.builtin.file:
+    path: '/etc/ssh/ssh_host_{{ item }}_key.pub'
+    owner: root
+    group: root
+    mode: "{{ l3d_users__server_key_mode }}"
+  loop: "{{ l3d_users__sshd_server_key_types }}"
   notify:
     - 'systemctl restart sshd'
 
@@ -28,7 +39,7 @@
     path: '/etc/ssh/ssh_host_{{ item }}_key.pub'
     state: absent
   become: true
-  with_items:
+  loop:
     - "{{ l3d_users__sshd_key_types_list | difference(l3d_users__sshd_server_key_types) }}"
   notify:
     - 'systemctl restart sshd'
