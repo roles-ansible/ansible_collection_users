@@ -45,10 +45,10 @@ fi
 
 HISTCONTROL={{ l3d_users__dotfiles__history_control }}
 shopt -s histappend
-{% if ansible_os_family == 'Redhat' %}
+{% if ansible_facts['os_family'] == 'Redhat' %}
 # HISTSIZE={{ l3d_users__dotfiles__history_size }}
 # HISTFILESIZE={{ l3d_users__dotfiles__history_file_size }}
-{% elif ansible_distribution == "CentOS" %}
+{% elif ansible_facts['distribution'] == "CentOS" %}
 # HISTSIZE={{ l3d_users__dotfiles__history_size }}
 # HISTFILESIZE={{ l3d_users__dotfiles__history_file_size }}
 {% else %}
