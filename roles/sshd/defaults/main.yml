@@ -66,9 +66,11 @@ l3d_users__sshd_key_algorithmus:
 
 l3d_users__sshd_manage_kex_algorithmus: true
 l3d_users__sshd_kex_algorithmus:
+  # - 'mlkem768x25519-sha256'
+  - 'sntrup761x25519-sha512@openssh.com'
   - 'curve25519-sha256@libssh.org'
   - 'diffie-hellman-group-exchange-sha256'
-  - 'diffie-hellman-group-exchange-sha1'
+  # - 'diffie-hellman-group-exchange-sha1'
   # - 'diffie-hellman-group14-sha1'
   # - 'diffie-hellman-group1-sha1'
 
