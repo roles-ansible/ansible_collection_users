@@ -4,17 +4,47 @@
 # This is the sshd server system-wide configuration file.  See
 # sshd_config(5) for more information.
 
-# Include SSHD config snippets
-# Support fot this starts with sshd 8.0
-Include /etc/ssh/sshd_config.d/*.conf
+# Do not include SSHD config snippets
+# Support fot this starts with sshd 8.0, you are using {{  _sshd_version | default(7.0) }}
+# Include /etc/ssh/sshd_config.d/*.conf
 
 # Networking
 Port {{ l3d_users__sshd_port }}
 AddressFamily any
-# ListenAddress 0.0.0.0
-# ListenAddress ::
+#ListenAddress 0.0.0.0
+#ListenAddress ::
 
 TCPKeepAlive yes
+
+# SSHD Key exchange
+{% if l3d_users__sshd_manage_key_algorithmus | bool %}
+# -> HostkeyAlgorithms
+HostkeyAlgorithms {{ l3d_users__sshd_key_algorithmus | join(',') }}
+{% else %}
+# No HostkeyAlgorithms defined
+{% endif %}
+
+{% if l3d_users__sshd_manage_kex_algorithmus | bool %}
+# -> KexAlgorithms
+KexAlgorithms {{ l3d_users__sshd_kex_algorithmus | join(',') }}
+{% else %}
+# No KexAlgorithms defined
+{% endif %}
+
+# Ciphers and keying
+{% if l3d_users__sshd_manage_ciphers | bool %}
+# -> Ciphers
+Ciphers {{ l3d_users__sshd_ciphers | join(',') }}
+{% else %}
+# No Ciphers defined
+{% endif %}
+
+{% if l3d_users__sshd_manage_macs | bool %}
+# -> Macs
+MACs {{ l3d_users__sshd_macs | join(',') }}
+{% else %}
+# No MACs defined
+{% endif %}
 
 # Server Authentication
 Protocol 2

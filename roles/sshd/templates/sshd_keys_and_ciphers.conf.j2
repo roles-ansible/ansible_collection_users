@@ -1,0 +1,36 @@
+# Attention, local changew will be overwritten
+# MIT (C) L3D <l3d@c3woc.de>
+# {{ ansible_managed }}
+# This is the sshd server system-wide configuration file.  See
+# sshd_config(5) for more information.
+
+# SSHD Key exchange
+{% if l3d_users__sshd_manage_key_algorithmus | bool %}
+# -> HostkeyAlgorithms
+HostkeyAlgorithms {{ l3d_users__sshd_key_algorithmus | join(',') }}
+{% else %}
+# No HostkeyAlgorithms defined
+{% endif %}
+
+{% if l3d_users__sshd_manage_kex_algorithmus | bool %}
+# -> KexAlgorithms
+KexAlgorithms {{ l3d_users__sshd_kex_algorithmus | join(',') }}
+{% else %}
+# No KexAlgorithms defined
+{% endif %}
+
+# Ciphers and keying
+{% if l3d_users__sshd_manage_ciphers | bool %}
+# -> Ciphers
+Ciphers {{ l3d_users__sshd_ciphers | join(',') }}
+{% else %}
+# No Ciphers defined
+{% endif %}
+
+{% if l3d_users__sshd_manage_macs | bool %}
+# -> Macs
+MACs {{ l3d_users__sshd_macs | join(',') }}
+{% else %}
+# No MACs defined
+{% endif %}
+
