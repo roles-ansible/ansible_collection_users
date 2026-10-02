@@ -42,6 +42,20 @@ else
     export PS1='{{ l3d_users__dotfiles__user_prompt }} '
 fi
 
+{% if l3d_users__dotfiles_gopass %}
+_gopass_bash_autocomplete() {
+     local cur opts base
+     COMPREPLY=()
+     cur="${COMP_WORDS[COMP_CWORD]}"
+     # Use error handling to prevent crashes from invalid flags
+     opts=$( ${COMP_WORDS[@]:0:$COMP_CWORD} --generate-shell-completion 2>/dev/null ) || opts=""
+     local IFS=$'\n'
+     COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+     return 0
+ }
+
+complete -F _gopass_bash_autocomplete gopass
+{% endif %}
 
 HISTCONTROL={{ l3d_users__dotfiles__history_control }}
 shopt -s histappend
