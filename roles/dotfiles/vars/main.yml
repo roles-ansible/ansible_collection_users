@@ -6,5 +6,5 @@ l3d_users__dotfiles_packages:
   - tmux
   - terminator
 
-playbook_version_number: 11
+playbook_version_number: 12
 playbook_version_path: 'l3d.users.dotfiles.version'
